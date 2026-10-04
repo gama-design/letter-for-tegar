@@ -1,8 +1,4 @@
-/* =========================
-   GLOBAL
-========================= */
-
-* {
+{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -58,7 +54,7 @@ body {
 
 
 /* =========================
-   INTRO
+   INTRO TEXT
 ========================= */
 
 .cover-subtitle {
@@ -66,6 +62,7 @@ body {
 
     font-family: Arial, sans-serif;
     font-size: 10px;
+    font-weight: 400;
 
     letter-spacing: 4px;
     text-transform: uppercase;
@@ -77,7 +74,7 @@ body {
 
 
 /* =========================
-   ENVELOPE BASE
+   ENVELOPE
 ========================= */
 
 .envelope {
@@ -95,6 +92,8 @@ body {
         0 8px 20px rgba(130, 67, 84, 0.08);
 
     animation: floating 4s ease-in-out infinite;
+
+    perspective: 1000px;
 }
 
 
@@ -126,6 +125,10 @@ body {
         0 5px 15px rgba(100, 50, 70, 0.08);
 
     z-index: 2;
+
+    transition:
+        transform 1s ease 0.3s,
+        z-index 0s linear 0.3s;
 }
 
 
@@ -166,13 +169,8 @@ body {
 }
 
 
-/* =================================================
-   4 ENVELOPE FLAPS
-================================================= */
-
-
 /* =========================
-   LEFT
+   LEFT FLAP
 ========================= */
 
 .envelope-left {
@@ -197,7 +195,7 @@ body {
 
 
 /* =========================
-   RIGHT
+   RIGHT FLAP
 ========================= */
 
 .envelope-right {
@@ -222,7 +220,7 @@ body {
 
 
 /* =========================
-   BOTTOM
+   BOTTOM FLAP
 ========================= */
 
 .envelope-bottom {
@@ -247,7 +245,7 @@ body {
 
 
 /* =========================
-   TOP
+   TOP FLAP
 ========================= */
 
 .envelope-flap {
@@ -270,6 +268,12 @@ body {
     border-radius: 6px 6px 0 0;
 
     z-index: 6;
+
+    transform-origin: top center;
+
+    transition:
+        transform 0.8s ease,
+        z-index 0s linear 0.8s;
 }
 
 
@@ -294,6 +298,8 @@ body {
 
     font-size: 10px;
 
+    font-weight: 500;
+
     letter-spacing: 4px;
 
     cursor: pointer;
@@ -303,9 +309,8 @@ body {
     transition:
         transform 0.3s ease,
         background 0.3s ease,
-        box-shadow 0.3s ease;
-
-    animation: fadeUp 1s ease 0.4s both;
+        box-shadow 0.3s ease,
+        opacity 0.5s ease;
 }
 
 
@@ -325,7 +330,7 @@ body {
 
 
 /* =========================
-   HEARTS
+   DECORATIVE HEARTS
 ========================= */
 
 .heart {
@@ -344,6 +349,8 @@ body {
 .heart-1 {
     top: 18%;
     left: 18%;
+
+    animation-delay: 0s;
 }
 
 
@@ -397,7 +404,52 @@ body {
 
 
 /* =========================
-   ANIMATION
+   OPEN ANIMATION
+========================= */
+
+/* Flap atas membuka ke belakang */
+
+.envelope.opened .envelope-flap {
+    transform: rotateX(180deg);
+
+    z-index: 1;
+
+    transition:
+        transform 0.8s ease,
+        z-index 0s linear 0.8s;
+}
+
+
+/* Surat naik ke depan */
+
+.envelope.opened .letter {
+    transform: translateX(-50%) translateY(-90px);
+
+    z-index: 10;
+
+    transition:
+        transform 1s ease 0.3s,
+        z-index 0s linear 0.3s;
+}
+
+
+/* Tombol menghilang */
+
+.open-button.hide {
+    opacity: 0;
+
+    transform: translateY(20px);
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
+}
+
+
+/* =========================
+   ANIMATIONS
 ========================= */
 
 @keyframes floating {
@@ -466,28 +518,4 @@ body {
         font-size: 9px;
         letter-spacing: 3px;
     }
-}
-/* =========================
-   OPEN ANIMATION
-========================= */
-
-.envelope.opened .envelope-flap {
-    transform: rotateX(180deg);
-    transform-origin: top center;
-    transition: transform 0.8s ease;
-}
-
-.envelope.opened .letter {
-    transform: translateX(-50%) translateY(-90px);
-    transition: transform 1s ease 0.3s;
-}
-
-.open-button.hide {
-    opacity: 0;
-    transform: translateY(20px);
-    pointer-events: none;
-
-    transition:
-        opacity 0.5s ease,
-        transform 0.5s ease;
 }
