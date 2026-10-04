@@ -1,105 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
+const openButton = document.getElementById("openButton");
+const envelope = document.querySelector(".envelope");
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+openButton.addEventListener("click", () => {
 
-    <title>A Letter for Tegar</title>
+    // Cegah klik berkali-kali
+    openButton.disabled = true;
 
-    <link rel="stylesheet" href="style.css">
-</head>
+    // Buka envelope
+    envelope.classList.add("opened");
 
-<body>
+    // Hilangkan tombol
+    openButton.classList.add("hide");
 
-    <main class="cover">
+    // Tunggu surat selesai keluar
+    // lalu masuk ke halaman detail
+    setTimeout(() => {
 
-        <!-- DECORATIVE HEARTS -->
+        window.location.href = "detail.html";
 
-        <span class="heart heart-1">♡</span>
-        <span class="heart heart-2">♡</span>
-        <span class="heart heart-3">♡</span>
-        <span class="heart heart-4">♡</span>
+    }, 1900);
 
-
-        <!-- INTRO -->
-
-        <p class="cover-subtitle">
-            A little something for you
-        </p>
-
-
-        <!-- ENVELOPE -->
-
-        <div class="envelope">
-
-            <!--
-                TOP FLAP
-                Ini sengaja berada paling belakang
-                ketika surat keluar.
-            -->
-
-            <div class="flap top-flap"></div>
-
-
-            <!--
-                LETTER
-                Surat berada di atas TOP FLAP
-                tetapi masih di bawah flap lainnya.
-            -->
-
-            <div class="letter">
-
-                <p class="letter-small">
-                    With Love
-                </p>
-
-                <h1>
-                    A Letter for Tegar
-                </h1>
-
-                <span class="letter-heart">
-                    ♡
-                </span>
-
-            </div>
-
-
-            <!--
-                LEFT / RIGHT / BOTTOM
-                Ketiganya berada di depan surat.
-            -->
-
-            <div class="flap left-flap"></div>
-
-            <div class="flap right-flap"></div>
-
-            <div class="flap bottom-flap"></div>
-
-        </div>
-
-
-        <!-- OPEN BUTTON -->
-
-        <button
-            class="open-button"
-            id="openButton"
-        >
-            OPEN
-        </button>
-
-
-        <!-- FOOTER -->
-
-        <p class="cover-footer">
-            made with love ♡
-        </p>
-
-    </main>
-
-
-    <script src="script.js"></script>
-
-</body>
-
-</html>
+});
