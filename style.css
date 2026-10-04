@@ -1,25 +1,49 @@
+/* =========================
+   GLOBAL
+========================= */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+html,
 body {
     width: 100%;
-    height: 100vh;
-    overflow: hidden;
+    height: 100%;
+}
 
+body {
     font-family: Georgia, "Times New Roman", serif;
+    overflow: hidden;
+}
+
+
+/* =========================
+   COVER
+========================= */
+
+.cover {
+    position: relative;
+
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     background:
         radial-gradient(
             circle at 20% 20%,
-            rgba(255,255,255,0.9),
+            rgba(255, 255, 255, 0.9),
             transparent 30%
         ),
         radial-gradient(
             circle at 80% 80%,
-            rgba(255,255,255,0.7),
+            rgba(255, 255, 255, 0.7),
             transparent 30%
         ),
         linear-gradient(
@@ -28,79 +52,49 @@ body {
             #fce8ee,
             #f8d4df
         );
+
+    overflow: hidden;
 }
 
 
 /* =========================
-   PAGE
+   INTRO
 ========================= */
 
-.page {
-    width: 100%;
-    height: 100vh;
-
-    display: flex;
-    flex-direction: column;
-
-    justify-content: center;
-    align-items: center;
-
-    position: relative;
-}
-
-
-/* =========================
-   TEXT ATAS
-========================= */
-
-.small-text {
-    margin-bottom: 35px;
+.cover-subtitle {
+    margin-bottom: 28px;
 
     font-family: Arial, sans-serif;
-
     font-size: 10px;
 
     letter-spacing: 4px;
-
     text-transform: uppercase;
 
     color: #ad7182;
+
+    animation: fadeUp 1s ease forwards;
 }
 
 
 /* =========================
-   ENVELOPE
+   ENVELOPE BASE
 ========================= */
 
 .envelope {
     position: relative;
 
     width: 320px;
-    height: 210px;
+    height: 215px;
 
-    perspective: 1000px;
+    background: #f4d6df;
 
-    filter:
-        drop-shadow(
-            0 20px 30px rgba(120, 70, 85, 0.16)
-        );
-}
+    border-radius: 6px;
 
+    box-shadow:
+        0 25px 60px rgba(130, 67, 84, 0.18),
+        0 8px 20px rgba(130, 67, 84, 0.08);
 
-/* =========================
-   BACK ENVELOPE
-========================= */
-
-.envelope-back {
-    position: absolute;
-
-    inset: 0;
-
-    background: #f3d1dc;
-
-    border-radius: 5px;
-
-    z-index: 1;
+    animation: floating 4s ease-in-out infinite;
 }
 
 
@@ -112,45 +106,32 @@ body {
     position: absolute;
 
     width: 260px;
-    height: 165px;
+    height: 160px;
 
-    left: 30px;
+    top: 25px;
+    left: 50%;
 
-    /*
-       SURAT DIMULAI DI DALAM AMplop
-    */
+    transform: translateX(-50%);
 
-    top: 35px;
-
-    background: white;
+    background: #ffffff;
 
     border-radius: 3px;
 
     display: flex;
     flex-direction: column;
-
-    align-items: center;
     justify-content: center;
+    align-items: center;
 
     box-shadow:
-        0 5px 15px rgba(100, 50, 70, 0.12);
+        0 5px 15px rgba(100, 50, 70, 0.08);
 
     z-index: 2;
-
-    /*
-       NANTI SURAT NAIK
-    */
-
-    transform: translateY(0);
-
-    transition:
-        transform 1s cubic-bezier(.22,.61,.36,1);
-
-    transition-delay: 0.65s;
 }
 
 
 .letter-small {
+    margin-bottom: 9px;
+
     font-family: Arial, sans-serif;
 
     font-size: 8px;
@@ -160,13 +141,13 @@ body {
     text-transform: uppercase;
 
     color: #c18a99;
-
-    margin-bottom: 10px;
 }
 
 
-.letter-title {
-    font-size: 25px;
+.letter h1 {
+    font-size: 27px;
+
+    font-weight: 400;
 
     font-style: italic;
 
@@ -179,34 +160,22 @@ body {
 .letter-heart {
     margin-top: 12px;
 
-    color: #d4869b;
-
     font-size: 18px;
+
+    color: #d4869b;
 }
+
+
+/* =================================================
+   4 ENVELOPE FLAPS
+================================================= */
 
 
 /* =========================
-   DEPAN AMPLOP
+   LEFT
 ========================= */
 
-.envelope-front {
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 3;
-
-    pointer-events: none;
-}
-
-
-/*
-   KIRI
-*/
-
-.envelope-front::before {
-    content: "";
-
+.envelope-left {
     position: absolute;
 
     left: 0;
@@ -222,16 +191,16 @@ body {
         100% 50%,
         0 100%
     );
+
+    z-index: 4;
 }
 
 
-/*
-   KANAN
-*/
+/* =========================
+   RIGHT
+========================= */
 
-.envelope-front::after {
-    content: "";
-
+.envelope-right {
     position: absolute;
 
     right: 0;
@@ -247,31 +216,38 @@ body {
         0 50%,
         100% 100%
     );
-}
 
-
-/*
-   BAGIAN BAWAH
-*/
-
-.envelope-front {
-    background:
-        linear-gradient(
-            135deg,
-            transparent 49.5%,
-            #fbecef 50%
-        );
-
-    clip-path: polygon(
-        0 100%,
-        50% 50%,
-        100% 100%
-    );
+    z-index: 4;
 }
 
 
 /* =========================
-   FLAP ATAS
+   BOTTOM
+========================= */
+
+.envelope-bottom {
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 58%;
+
+    background: #fbecef;
+
+    clip-path: polygon(
+        0 100%,
+        50% 0,
+        100% 100%
+    );
+
+    z-index: 5;
+}
+
+
+/* =========================
+   TOP
 ========================= */
 
 .envelope-flap {
@@ -283,7 +259,7 @@ body {
     width: 100%;
     height: 58%;
 
-    background: #efc9d5;
+    background: #f0cbd6;
 
     clip-path: polygon(
         0 0,
@@ -291,46 +267,17 @@ body {
         100% 0
     );
 
-    transform-origin: 50% 0%;
+    border-radius: 6px 6px 0 0;
 
-    z-index: 5;
-
-    transition:
-        transform 0.8s cubic-bezier(.4,0,.2,1);
-
-    transform-style: preserve-3d;
+    z-index: 6;
 }
 
 
 /* =========================
-   OPEN
+   OPEN BUTTON
 ========================= */
 
-/*
-   Klik OPEN:
-   flap atas membuka
-*/
-
-.envelope.open .envelope-flap {
-    transform: rotateX(180deg);
-}
-
-
-/*
-   Setelah flap terbuka,
-   surat keluar dari dalam.
-*/
-
-.envelope.open .letter {
-    transform: translateY(-100px);
-}
-
-
-/* =========================
-   BUTTON
-========================= */
-
-#openButton {
+.open-button {
     margin-top: 45px;
 
     padding: 13px 42px;
@@ -339,7 +286,7 @@ body {
 
     border-radius: 30px;
 
-    background: rgba(255,255,255,0.7);
+    background: rgba(255, 255, 255, 0.65);
 
     color: #8c4b5d;
 
@@ -351,26 +298,80 @@ body {
 
     cursor: pointer;
 
+    backdrop-filter: blur(5px);
+
     transition:
-        0.3s ease;
+        transform 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease;
+
+    animation: fadeUp 1s ease 0.4s both;
 }
 
 
-#openButton:hover {
-    background: white;
+.open-button:hover {
+    background: #ffffff;
 
     transform: translateY(-3px);
 
     box-shadow:
-        0 10px 25px
-        rgba(130,67,84,0.15);
+        0 10px 25px rgba(130, 67, 84, 0.15);
 }
 
 
-#openButton.hide {
-    opacity: 0;
+.open-button:active {
+    transform: scale(0.96);
+}
+
+
+/* =========================
+   HEARTS
+========================= */
+
+.heart {
+    position: absolute;
+
+    color: rgba(197, 111, 135, 0.45);
+
+    font-size: 20px;
 
     pointer-events: none;
+
+    animation: heartFloat 5s ease-in-out infinite;
+}
+
+
+.heart-1 {
+    top: 18%;
+    left: 18%;
+}
+
+
+.heart-2 {
+    top: 25%;
+    right: 16%;
+
+    font-size: 14px;
+
+    animation-delay: 1s;
+}
+
+
+.heart-3 {
+    bottom: 23%;
+    left: 14%;
+
+    font-size: 13px;
+
+    animation-delay: 2s;
+}
+
+
+.heart-4 {
+    bottom: 18%;
+    right: 18%;
+
+    animation-delay: 1.5s;
 }
 
 
@@ -378,10 +379,10 @@ body {
    FOOTER
 ========================= */
 
-.footer {
+.cover-footer {
     position: absolute;
 
-    bottom: 25px;
+    bottom: 24px;
 
     font-family: Arial, sans-serif;
 
@@ -390,6 +391,54 @@ body {
     letter-spacing: 2px;
 
     color: #b47788;
+
+    opacity: 0.7;
+}
+
+
+/* =========================
+   ANIMATION
+========================= */
+
+@keyframes floating {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+
+@keyframes fadeUp {
+
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes heartFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.35;
+    }
+
+    50% {
+        transform: translateY(-15px) rotate(8deg);
+        opacity: 0.8;
+    }
 }
 
 
@@ -401,17 +450,44 @@ body {
 
     .envelope {
         width: 280px;
-        height: 185px;
+        height: 190px;
     }
 
     .letter {
         width: 230px;
-        height: 145px;
-
-        left: 25px;
+        height: 140px;
     }
 
-    .letter-title {
-        font-size: 21px;
+    .letter h1 {
+        font-size: 24px;
     }
+
+    .cover-subtitle {
+        font-size: 9px;
+        letter-spacing: 3px;
+    }
+}
+/* =========================
+   OPEN ANIMATION
+========================= */
+
+.envelope.opened .envelope-flap {
+    transform: rotateX(180deg);
+    transform-origin: top center;
+    transition: transform 0.8s ease;
+}
+
+.envelope.opened .letter {
+    transform: translateX(-50%) translateY(-90px);
+    transition: transform 1s ease 0.3s;
+}
+
+.open-button.hide {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
 }
