@@ -1,76 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>A Letter for Tegar</title>
-
+    <title>Undangan Surat Teguh</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <main class="cover">
-
-        <!-- Decorative Hearts -->
-        <span class="heart heart-1">♡</span>
-        <span class="heart heart-2">♡</span>
-        <span class="heart heart-3">♡</span>
-        <span class="heart heart-4">♡</span>
-
-        <!-- Small Introduction -->
-        <p class="cover-subtitle">
-            A little something for you
-        </p>
-
-        <!-- ENVELOPE -->
-        <div class="envelope">
-
-            <!-- Letter -->
+    <div class="container">
+        
+        <!-- Area Utama Amplop -->
+        <div class="envelope-wrapper">
+            
+            <!-- 1. FLAP (Tutup Atas Terbuka) - Layer Paling Belakang -->
+            <div class="envelope-flap open"></div>
+            
+            <!-- 2. LETTER (Kertas Surat) - Layer Tengah -->
             <div class="letter">
-
-                <p class="letter-small">
-                    With Love
-                </p>
-
-                <h1>
-                    A Letter for Tegar
-                </h1>
-
-                <span class="letter-heart">
-                    ♡
-                </span>
-
+                <div class="letter-content">
+                    <h1>A Letter for Teguh</h1>
+                    <div class="heart-icon">♡</div>
+                </div>
             </div>
-
-            <!-- Envelope Bottom Flap -->
-            <div class="envelope-bottom"></div>
-
-            <!-- Envelope Left Flap -->
-            <div class="envelope-left"></div>
-
-            <!-- Envelope Right Flap -->
-            <div class="envelope-right"></div>
-
-            <!-- Envelope Top Flap -->
-            <div class="envelope-flap"></div>
-
+            
+            <!-- 3. ENVELOPE BODY (Lipatan Depan) - Layer Paling Depan -->
+            <div class="envelope-body"></div>
         </div>
 
-        <!-- Open Button -->
-        <button class="open-button" id="openButton">
-            OPEN
-        </button>
-
-        <!-- Bottom Text -->
-        <p class="cover-footer">
-            made with love ♡
-        </p>
-
-    </main>
-
-    <script src="script.js"></script>
+        <!-- Tombol OPEN -->
+        <button class="open-btn">OPEN</button>
+        
+    </div>
 
 </body>
 </html>
