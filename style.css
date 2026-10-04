@@ -77,7 +77,7 @@ body {
 
 
 /* =========================
-   ENVELOPE BASE
+   ENVELOPE
 ========================= */
 
 .envelope {
@@ -95,6 +95,11 @@ body {
         0 8px 20px rgba(130, 67, 84, 0.08);
 
     animation: floating 4s ease-in-out infinite;
+
+    /*
+       Penting untuk animasi flap
+    */
+    perspective: 1000px;
 }
 
 
@@ -111,7 +116,11 @@ body {
     top: 25px;
     left: 50%;
 
-    transform: translateX(-50%);
+    /*
+       Kondisi awal:
+       surat berada di dalam amplop
+    */
+    transform: translateX(-50%) translateY(0);
 
     background: #ffffff;
 
@@ -125,7 +134,20 @@ body {
     box-shadow:
         0 5px 15px rgba(100, 50, 70, 0.08);
 
+    /*
+       Surat berada di belakang
+       semua flap ketika tertutup.
+    */
     z-index: 2;
+
+    /*
+       Surat baru bergerak setelah
+       flap atas mulai terbuka.
+    */
+    transition:
+        transform 1s
+        cubic-bezier(0.22, 0.61, 0.36, 1)
+        0.65s;
 }
 
 
@@ -137,7 +159,6 @@ body {
     font-size: 8px;
 
     letter-spacing: 3px;
-
     text-transform: uppercase;
 
     color: #c18a99;
@@ -148,7 +169,6 @@ body {
     font-size: 27px;
 
     font-weight: 400;
-
     font-style: italic;
 
     color: #8c4b5d;
@@ -166,13 +186,8 @@ body {
 }
 
 
-/* =================================================
-   4 ENVELOPE FLAPS
-================================================= */
-
-
 /* =========================
-   LEFT
+   LEFT FLAP
 ========================= */
 
 .envelope-left {
@@ -192,12 +207,17 @@ body {
         0 100%
     );
 
+    /*
+       Tetap di DEPAN surat
+    */
     z-index: 4;
+
+    pointer-events: none;
 }
 
 
 /* =========================
-   RIGHT
+   RIGHT FLAP
 ========================= */
 
 .envelope-right {
@@ -217,12 +237,17 @@ body {
         100% 100%
     );
 
+    /*
+       Tetap di DEPAN surat
+    */
     z-index: 4;
+
+    pointer-events: none;
 }
 
 
 /* =========================
-   BOTTOM
+   BOTTOM FLAP
 ========================= */
 
 .envelope-bottom {
@@ -242,12 +267,17 @@ body {
         100% 100%
     );
 
+    /*
+       Tetap di DEPAN surat
+    */
     z-index: 5;
+
+    pointer-events: none;
 }
 
 
 /* =========================
-   TOP
+   TOP FLAP
 ========================= */
 
 .envelope-flap {
@@ -269,7 +299,67 @@ body {
 
     border-radius: 6px 6px 0 0;
 
+    /*
+       Awalnya paling depan.
+    */
     z-index: 6;
+
+    /*
+       Titik putarnya di bagian atas
+       seperti tutup amplop asli.
+    */
+    transform-origin: 50% 0%;
+
+    transform-style: preserve-3d;
+
+    /*
+       Jangan hilang ketika dibalik.
+    */
+    backface-visibility: visible;
+
+    transition:
+        transform 0.8s
+        cubic-bezier(0.4, 0, 0.2, 1);
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   OPEN STATE
+========================= */
+
+/*
+   KLIK OPEN
+
+   Tutup atas membuka ke belakang.
+*/
+
+.envelope.opened .envelope-flap {
+    transform: rotateX(180deg);
+
+    /*
+       Setelah flap terbuka,
+       surat harus berada di depannya.
+    */
+    z-index: 1;
+}
+
+
+/*
+   SURAT KELUAR
+
+   Delay 0.65 detik supaya:
+   1. flap membuka dulu
+   2. baru surat keluar
+*/
+
+.envelope.opened .letter {
+    transform:
+        translateX(-50%)
+        translateY(-90px);
+
+    z-index: 3;
 }
 
 
@@ -303,9 +393,11 @@ body {
     transition:
         transform 0.3s ease,
         background 0.3s ease,
-        box-shadow 0.3s ease;
+        box-shadow 0.3s ease,
+        opacity 0.5s ease;
 
-    animation: fadeUp 1s ease 0.4s both;
+    animation:
+        fadeUp 1s ease 0.4s both;
 }
 
 
@@ -324,6 +416,17 @@ body {
 }
 
 
+/* Setelah diklik */
+
+.open-button.hide {
+    opacity: 0;
+
+    transform: translateY(20px);
+
+    pointer-events: none;
+}
+
+
 /* =========================
    HEARTS
 ========================= */
@@ -337,7 +440,8 @@ body {
 
     pointer-events: none;
 
-    animation: heartFloat 5s ease-in-out infinite;
+    animation:
+        heartFloat 5s ease-in-out infinite;
 }
 
 
@@ -397,7 +501,7 @@ body {
 
 
 /* =========================
-   ANIMATION
+   ANIMATIONS
 ========================= */
 
 @keyframes floating {
@@ -417,11 +521,13 @@ body {
 
     from {
         opacity: 0;
+
         transform: translateY(15px);
     }
 
     to {
         opacity: 1;
+
         transform: translateY(0);
     }
 }
@@ -431,12 +537,18 @@ body {
 
     0%,
     100% {
-        transform: translateY(0) rotate(0deg);
+        transform:
+            translateY(0)
+            rotate(0deg);
+
         opacity: 0.35;
     }
 
     50% {
-        transform: translateY(-15px) rotate(8deg);
+        transform:
+            translateY(-15px)
+            rotate(8deg);
+
         opacity: 0.8;
     }
 }
@@ -466,67 +578,4 @@ body {
         font-size: 9px;
         letter-spacing: 3px;
     }
-}
-/* =========================
-   OPEN ANIMATION
-========================= */
-
-.envelope.opened .envelope-flap {
-    transform: rotateX(180deg);
-    transform-origin: top center;
-    transition: transform 0.8s ease;
-}
-
-
-/* Surat naik keluar */
-
-.envelope.opened .letter {
-    transform: translateX(-50%) translateY(-90px);
-    transition: transform 1s ease 0.3s;
-}
-
-
-/* Tombol menghilang */
-
-.open-button.hide {
-    opacity: 0;
-    transform: translateY(20px);
-    pointer-events: none;
-
-    transition:
-        opacity 0.5s ease,
-        transform 0.5s ease;
-}
-
-
-/* Cover menghilang */
-
-.cover.fade-out {
-    opacity: 0;
-    transition: opacity 1s ease;
-    pointer-events: none;
-}
-/* =========================
-   OPEN ANIMATION
-========================= */
-
-.envelope.opened .envelope-flap {
-    transform: rotateX(180deg);
-    transform-origin: top center;
-    transition: transform 0.8s ease;
-}
-
-.envelope.opened .letter {
-    transform: translateX(-50%) translateY(-90px);
-    transition: transform 1s ease 0.3s;
-}
-
-.open-button.hide {
-    opacity: 0;
-    transform: translateY(20px);
-    pointer-events: none;
-
-    transition:
-        opacity 0.5s ease,
-        transform 0.5s ease;
 }
