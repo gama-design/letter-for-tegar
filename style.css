@@ -1,0 +1,441 @@
+ {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    overflow: hidden;
+}
+
+
+/* =========================
+   COVER BACKGROUND
+========================= */
+
+.cover {
+    position: relative;
+
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(255, 255, 255, 0.9) 0%,
+            rgba(255, 255, 255, 0) 30%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(255, 255, 255, 0.7) 0%,
+            rgba(255, 255, 255, 0) 30%
+        ),
+        linear-gradient(
+            135deg,
+            #fff8fa,
+            #fce8ee,
+            #f8d4df
+        );
+
+    overflow: hidden;
+}
+
+
+/* =========================
+   SMALL INTRO TEXT
+========================= */
+
+.cover-subtitle {
+    margin-bottom: 28px;
+
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+
+    letter-spacing: 4px;
+    text-transform: uppercase;
+
+    color: #ad7182;
+
+    animation: fadeUp 1s ease forwards;
+}
+
+
+/* =========================
+   ENVELOPE
+========================= */
+
+.envelope {
+    position: relative;
+
+    width: 320px;
+    height: 215px;
+
+    background: #fffdfd;
+
+    border-radius: 5px;
+
+    box-shadow:
+        0 25px 60px rgba(130, 67, 84, 0.18),
+        0 8px 20px rgba(130, 67, 84, 0.08);
+
+    animation: floating 4s ease-in-out infinite;
+}
+
+
+/* Envelope lower fold */
+
+.envelope::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: #fdf1f5;
+
+    clip-path: polygon(
+        0 0,
+        50% 55%,
+        100% 0,
+        100% 100%,
+        0 100%
+    );
+
+    border-radius: 5px;
+
+    z-index: 2;
+}
+
+
+/* Envelope side folds */
+
+.envelope::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: #f8e2e8;
+
+    clip-path: polygon(
+        0 0,
+        50% 55%,
+        0 100%
+    );
+
+    border-radius: 5px;
+
+    z-index: 3;
+
+    opacity: 0.8;
+}
+
+
+/* =========================
+   LETTER
+========================= */
+
+.letter {
+    position: absolute;
+
+    width: 260px;
+    height: 160px;
+
+    top: 25px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    background: #ffffff;
+
+    border-radius: 3px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow:
+        0 5px 15px rgba(100, 50, 70, 0.08);
+
+    z-index: 1;
+}
+
+
+/* Small text on letter */
+
+.letter-small {
+    margin-bottom: 9px;
+
+    font-family: Arial, sans-serif;
+    font-size: 8px;
+
+    letter-spacing: 3px;
+    text-transform: uppercase;
+
+    color: #c18a99;
+}
+
+
+/* Main title */
+
+.letter h1 {
+    font-size: 27px;
+    font-weight: 400;
+    font-style: italic;
+
+    color: #8c4b5d;
+
+    text-align: center;
+}
+
+
+/* Heart inside letter */
+
+.letter-heart {
+    margin-top: 12px;
+
+    font-size: 18px;
+
+    color: #d4869b;
+}
+
+
+/* =========================
+   ENVELOPE FLAP
+========================= */
+
+.envelope-flap {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 120px;
+
+    background: #f7d9e2;
+
+    clip-path: polygon(
+        0 0,
+        50% 100%,
+        100% 0
+    );
+
+    border-radius: 5px 5px 0 0;
+
+    z-index: 4;
+}
+
+
+/* =========================
+   OPEN BUTTON
+========================= */
+
+.open-button {
+    margin-top: 45px;
+
+    padding: 13px 42px;
+
+    border: 1px solid #d596a7;
+    border-radius: 30px;
+
+    background: rgba(255, 255, 255, 0.65);
+
+    color: #8c4b5d;
+
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+
+    letter-spacing: 4px;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(5px);
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        box-shadow 0.3s ease;
+
+    animation: fadeUp 1s ease 0.4s both;
+}
+
+
+/* Button hover */
+
+.open-button:hover {
+    background: #ffffff;
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 25px rgba(130, 67, 84, 0.15);
+}
+
+
+/* Button click */
+
+.open-button:active {
+    transform: scale(0.96);
+}
+
+
+/* =========================
+   DECORATIVE HEARTS
+========================= */
+
+.heart {
+    position: absolute;
+
+    color: rgba(197, 111, 135, 0.45);
+
+    font-size: 20px;
+
+    pointer-events: none;
+
+    animation: heartFloat 5s ease-in-out infinite;
+}
+
+
+.heart-1 {
+    top: 18%;
+    left: 18%;
+
+    animation-delay: 0s;
+}
+
+
+.heart-2 {
+    top: 25%;
+    right: 16%;
+
+    font-size: 14px;
+
+    animation-delay: 1s;
+}
+
+
+.heart-3 {
+    bottom: 23%;
+    left: 14%;
+
+    font-size: 13px;
+
+    animation-delay: 2s;
+}
+
+
+.heart-4 {
+    bottom: 18%;
+    right: 18%;
+
+    animation-delay: 1.5s;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.cover-footer {
+    position: absolute;
+
+    bottom: 24px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+
+    color: #b47788;
+
+    opacity: 0.7;
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes floating {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+
+@keyframes fadeUp {
+
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+@keyframes heartFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.35;
+    }
+
+    50% {
+        transform: translateY(-15px) rotate(8deg);
+        opacity: 0.8;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 400px) {
+
+    .envelope {
+        width: 280px;
+        height: 190px;
+    }
+
+    .letter {
+        width: 230px;
+        height: 140px;
+    }
+
+    .letter h1 {
+        font-size: 24px;
+    }
+
+    .cover-subtitle {
+        font-size: 9px;
+        letter-spacing: 3px;
+    }
+}
