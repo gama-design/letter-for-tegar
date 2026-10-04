@@ -467,3 +467,42 @@ body {
         letter-spacing: 3px;
     }
 }
+/* =========================
+   OPEN ANIMATION
+========================= */
+
+.envelope.opened .envelope-flap {
+    transform: rotateX(180deg);
+    transform-origin: top center;
+    transition: transform 0.8s ease;
+}
+
+
+/* Surat naik keluar */
+
+.envelope.opened .letter {
+    transform: translateX(-50%) translateY(-90px);
+    transition: transform 1s ease 0.3s;
+}
+
+
+/* Tombol menghilang */
+
+.open-button.hide {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
+}
+
+
+/* Cover menghilang */
+
+.cover.fade-out {
+    opacity: 0;
+    transition: opacity 1s ease;
+    pointer-events: none;
+}
