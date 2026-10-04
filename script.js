@@ -1,40 +1,20 @@
 const openButton = document.getElementById("openButton");
-const envelope = document.querySelector(".envelope");
+const envelope = document.getElementById("envelope");
 
-openButton.addEventListener("click", () => {
+openButton.addEventListener("click", function () {
 
-    // Cegah klik dua kali
+    // Tombol tidak bisa diklik dua kali
     openButton.disabled = true;
+
+    // Mulai animasi amplop
+    envelope.classList.add("open");
 
     // Hilangkan tombol
     openButton.classList.add("hide");
 
-    // =========================
-    // TAHAP 1
-    // BUKA TOP FLAP
-    // =========================
-
-    envelope.classList.add("opened");
-
-
-    // =========================
-    // TAHAP 2
-    // SURAT KELUAR
-    // =========================
-
-    setTimeout(() => {
-
-        envelope.classList.add("letter-out");
-
-    }, 700);
-
-
-    // =========================
-    // TAHAP 3
-    // PINDAH KE DETAIL
-    // =========================
-
-    setTimeout(() => {
+    // Setelah animasi selesai,
+    // masuk ke halaman detail
+    setTimeout(function () {
 
         window.location.href = "detail.html";
 
