@@ -148,3 +148,24 @@ html, body {
     pointer-events: none;
     transform: scale(0.9);
 }
+/* --- ANIMASI FLOATING AMPLOP (DITARUH DI PALING BAWAH STYLE.CSS) --- */
+
+.envelope {
+    animation: floatEnvelope 3s ease-in-out infinite;
+}
+
+@keyframes floatEnvelope {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-12px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.envelope.opened {
+    animation: none;
+}
