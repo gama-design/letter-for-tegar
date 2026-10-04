@@ -58,13 +58,14 @@ body {
 
 
 /* =========================
-   INTRO
+   INTRO TEXT
 ========================= */
 
 .cover-subtitle {
     margin-bottom: 28px;
 
     font-family: Arial, sans-serif;
+
     font-size: 10px;
     font-weight: 400;
 
@@ -78,7 +79,7 @@ body {
 
 
 /* =========================
-   ENVELOPE AREA
+   ENVELOPE WRAPPER
 ========================= */
 
 .envelope-wrapper {
@@ -90,6 +91,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    perspective: 1000px;
 }
 
 
@@ -114,16 +117,93 @@ body {
     animation: floating 4s ease-in-out infinite;
 
     /*
-       PENTING:
-       Envelope tidak boleh menjadi
-       clipping area untuk surat.
+       Jangan pakai overflow:hidden.
+       Surat harus bisa keluar dari envelope.
     */
     overflow: visible;
+
+    transform-style: preserve-3d;
 }
 
 
 /* =========================
-   ENVELOPE LEFT
+   LETTER
+========================= */
+
+.letter {
+    position: absolute;
+
+    width: 260px;
+    height: 160px;
+
+    top: 25px;
+    left: 50%;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+
+    background: #ffffff;
+
+    border-radius: 3px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow:
+        0 5px 15px rgba(100, 50, 70, 0.08);
+
+    /*
+       SURAT PALING DEPAN
+    */
+    z-index: 100;
+
+    transition:
+        transform 1s cubic-bezier(.22, .61, .36, 1) 0.35s;
+}
+
+
+.letter-small {
+    margin-bottom: 9px;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+
+    text-transform: uppercase;
+
+    color: #c18a99;
+}
+
+
+.letter h1 {
+    font-size: 27px;
+
+    font-weight: 400;
+
+    font-style: italic;
+
+    color: #8c4b5d;
+
+    text-align: center;
+}
+
+
+.letter-heart {
+    margin-top: 12px;
+
+    font-size: 18px;
+
+    color: #d4869b;
+}
+
+
+/* =========================
+   LEFT FLAP
 ========================= */
 
 .envelope-left {
@@ -148,7 +228,7 @@ body {
 
 
 /* =========================
-   ENVELOPE RIGHT
+   RIGHT FLAP
 ========================= */
 
 .envelope-right {
@@ -173,7 +253,7 @@ body {
 
 
 /* =========================
-   ENVELOPE BOTTOM
+   BOTTOM FLAP
 ========================= */
 
 .envelope-bottom {
@@ -221,92 +301,18 @@ body {
     border-radius: 6px 6px 0 0;
 
     /*
-       Top flap berada di atas
-       envelope lainnya saat tertutup.
+       Saat tertutup:
+       top flap berada paling depan.
     */
     z-index: 40;
 
     transform-origin: 50% 0%;
 
+    transform-style: preserve-3d;
+
     transition:
         transform 0.9s cubic-bezier(.4, 0, .2, 1),
-        opacity 0.2s ease 0.7s;
-}
-
-
-/* =========================
-   LETTER
-========================= */
-
-.letter {
-    position: absolute;
-
-    width: 260px;
-    height: 160px;
-
-    top: 25px;
-    left: 50%;
-
-    transform:
-        translateX(-50%)
-        translateY(0);
-
-    background: #ffffff;
-
-    border-radius: 3px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    box-shadow:
-        0 5px 15px rgba(100, 50, 70, 0.08);
-
-    /*
-       SURAT SELALU PALING DEPAN.
-    */
-    z-index: 100;
-
-    transition:
-        transform 1s cubic-bezier(.22, .61, .36, 1) 0.35s;
-}
-
-
-.letter-small {
-    margin-bottom: 9px;
-
-    font-family: Arial, sans-serif;
-
-    font-size: 8px;
-
-    letter-spacing: 3px;
-
-    text-transform: uppercase;
-
-    color: #c18a99;
-}
-
-
-.letter h1 {
-    font-size: 27px;
-
-    font-weight: 400;
-
-    font-style: italic;
-
-    color: #8c4b5d;
-
-    text-align: center;
-}
-
-
-.letter-heart {
-    margin-top: 12px;
-
-    font-size: 18px;
-
-    color: #d4869b;
+        opacity 0.2s ease 0.75s;
 }
 
 
@@ -315,18 +321,16 @@ body {
 ========================= */
 
 /*
-   STEP 1
-   Segitiga atas FLIP ke belakang.
+   TOP FLAP FLIP
 
-   Dia berputar dari bagian atas,
-   sehingga sudut segitiganya yang
-   tadinya mengarah ke bawah akan
-   berbalik ke atas.
+   Titik putarnya di bagian atas.
+   Sudut bawah segitiga yang tadinya
+   mengarah ke bawah akan berbalik
+   ke atas.
 */
 
 .envelope.opened .envelope-flap {
     transform:
-        perspective(700px)
         rotateX(180deg);
 
     opacity: 0;
@@ -336,12 +340,13 @@ body {
 
 
 /*
-   STEP 2
-   Surat keluar ke depan.
+   LETTER COMES OUT
 
-   Karena surat z-index = 100,
-   surat berada di atas semua
-   bagian envelope.
+   Surat bergerak ke atas setelah
+   flap mulai terbuka.
+
+   Surat punya z-index 100,
+   sehingga berada DI DEPAN.
 */
 
 .envelope.opened .letter {
@@ -388,7 +393,8 @@ body {
         box-shadow 0.3s ease,
         opacity 0.5s ease;
 
-    animation: fadeUp 1s ease 0.4s both;
+    animation:
+        fadeUp 1s ease 0.4s both;
 }
 
 
@@ -429,7 +435,8 @@ body {
 
     pointer-events: none;
 
-    animation: heartFloat 5s ease-in-out infinite;
+    animation:
+        heartFloat 5s ease-in-out infinite;
 }
 
 
@@ -489,7 +496,7 @@ body {
 
 
 /* =========================
-   ANIMATIONS
+   ANIMATION
 ========================= */
 
 @keyframes floating {
@@ -523,12 +530,18 @@ body {
 
     0%,
     100% {
-        transform: translateY(0) rotate(0deg);
+        transform:
+            translateY(0)
+            rotate(0deg);
+
         opacity: 0.35;
     }
 
     50% {
-        transform: translateY(-15px) rotate(8deg);
+        transform:
+            translateY(-15px)
+            rotate(8deg);
+
         opacity: 0.8;
     }
 }
@@ -539,6 +552,11 @@ body {
 ========================= */
 
 @media (max-width: 400px) {
+
+    .envelope-wrapper {
+        width: 280px;
+        height: 190px;
+    }
 
     .envelope {
         width: 280px;
