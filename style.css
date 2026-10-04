@@ -124,11 +124,11 @@ body {
     box-shadow:
         0 5px 15px rgba(100, 50, 70, 0.08);
 
-    z-index: 2;
+    /* SURAT DI DEPAN */
+    z-index: 20;
 
     transition:
-        transform 1s ease 0.3s,
-        z-index 0s linear 0.3s;
+        transform 1s ease 0.15s;
 }
 
 
@@ -190,7 +190,7 @@ body {
         0 100%
     );
 
-    z-index: 4;
+    z-index: 5;
 }
 
 
@@ -215,7 +215,7 @@ body {
         100% 100%
     );
 
-    z-index: 4;
+    z-index: 5;
 }
 
 
@@ -240,7 +240,7 @@ body {
         100% 100%
     );
 
-    z-index: 5;
+    z-index: 6;
 }
 
 
@@ -267,13 +267,15 @@ body {
 
     border-radius: 6px 6px 0 0;
 
-    z-index: 6;
+    /* AWALNYA DI DEPAN */
+    z-index: 15;
 
     transform-origin: top center;
 
+    backface-visibility: hidden;
+
     transition:
-        transform 0.8s ease,
-        z-index 0s linear 0.8s;
+        transform 0.8s ease;
 }
 
 
@@ -311,6 +313,8 @@ body {
         background 0.3s ease,
         box-shadow 0.3s ease,
         opacity 0.5s ease;
+
+    animation: fadeUp 1s ease 0.4s both;
 }
 
 
@@ -407,33 +411,25 @@ body {
    OPEN ANIMATION
 ========================= */
 
-/* Flap atas membuka ke belakang */
+/* FLAP ATAS LANGSUNG KE BELAKANG */
 
 .envelope.opened .envelope-flap {
     transform: rotateX(180deg);
 
     z-index: 1;
-
-    transition:
-        transform 0.8s ease,
-        z-index 0s linear 0.8s;
 }
 
 
-/* Surat naik ke depan */
+/* SURAT NAIK KE DEPAN */
 
 .envelope.opened .letter {
     transform: translateX(-50%) translateY(-90px);
 
-    z-index: 10;
-
-    transition:
-        transform 1s ease 0.3s,
-        z-index 0s linear 0.3s;
+    z-index: 20;
 }
 
 
-/* Tombol menghilang */
+/* TOMBOL HILANG */
 
 .open-button.hide {
     opacity: 0;
