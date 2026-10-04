@@ -1,4 +1,4 @@
- {
+{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -54,7 +54,7 @@ body {
 
 
 /* =========================
-   INTRO
+   INTRO TEXT
 ========================= */
 
 .cover-subtitle {
@@ -123,9 +123,6 @@ body {
         0 5px 15px rgba(100, 50, 70, 0.08);
 
     z-index: 20;
-
-    transition:
-        transform 1s ease 0.15s;
 }
 
 
@@ -264,9 +261,11 @@ body {
 
     border-radius: 6px 6px 0 0;
 
-    z-index: 15;
+    z-index: 30;
 
-    transform-origin: top center;
+    transition:
+        transform 0.8s ease,
+        opacity 0.5s ease;
 }
 
 
@@ -329,26 +328,35 @@ body {
 ========================= */
 
 /*
-   SAAT OPEN:
-   flap atas naik dan HILANG
-   sehingga tidak mungkin menutupi surat.
+   TUTUP ATAS NAIK KE ATAS
 */
 
 .envelope.opened .envelope-flap {
-    animation: openFlap 0.8s ease forwards;
+    transform: translateY(-125px);
+
+    opacity: 0;
+
+    pointer-events: none;
 }
 
 
-/* Surat keluar ke atas */
+/*
+   SURAT KELUAR KE ATAS
+*/
 
 .envelope.opened .letter {
-    animation: letterComeOut 1s ease 0.15s forwards;
+    transform: translateX(-50%) translateY(-100px);
+
+    z-index: 50;
+
+    transition:
+        transform 1s ease 0.25s;
 }
 
 
-/* =========================
-   BUTTON AFTER OPEN
-========================= */
+/*
+   TOMBOL HILANG
+*/
 
 .open-button.hide {
     opacity: 0;
@@ -356,46 +364,6 @@ body {
     transform: translateY(20px);
 
     pointer-events: none;
-}
-
-
-/* =========================
-   FLAP ANIMATION
-========================= */
-
-@keyframes openFlap {
-
-    0% {
-        transform: rotateX(0deg);
-        opacity: 1;
-    }
-
-    70% {
-        transform: rotateX(90deg);
-        opacity: 1;
-    }
-
-    100% {
-        transform: rotateX(90deg);
-        opacity: 0;
-        visibility: hidden;
-    }
-}
-
-
-/* =========================
-   LETTER ANIMATION
-========================= */
-
-@keyframes letterComeOut {
-
-    0% {
-        transform: translateX(-50%) translateY(0);
-    }
-
-    100% {
-        transform: translateX(-50%) translateY(-90px);
-    }
 }
 
 
