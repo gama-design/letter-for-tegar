@@ -1,4 +1,8 @@
-{
+/* =========================
+   GLOBAL
+========================= */
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -54,7 +58,7 @@ body {
 
 
 /* =========================
-   INTRO TEXT
+   INTRO
 ========================= */
 
 .cover-subtitle {
@@ -70,6 +74,22 @@ body {
     color: #ad7182;
 
     animation: fadeUp 1s ease forwards;
+}
+
+
+/* =========================
+   ENVELOPE AREA
+========================= */
+
+.envelope-wrapper {
+    position: relative;
+
+    width: 320px;
+    height: 215px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -92,6 +112,125 @@ body {
         0 8px 20px rgba(130, 67, 84, 0.08);
 
     animation: floating 4s ease-in-out infinite;
+
+    /*
+       PENTING:
+       Envelope tidak boleh menjadi
+       clipping area untuk surat.
+    */
+    overflow: visible;
+}
+
+
+/* =========================
+   ENVELOPE LEFT
+========================= */
+
+.envelope-left {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 50%;
+    height: 100%;
+
+    background: #f4d6df;
+
+    clip-path: polygon(
+        0 0,
+        100% 50%,
+        0 100%
+    );
+
+    z-index: 10;
+}
+
+
+/* =========================
+   ENVELOPE RIGHT
+========================= */
+
+.envelope-right {
+    position: absolute;
+
+    right: 0;
+    top: 0;
+
+    width: 50%;
+    height: 100%;
+
+    background: #f4d6df;
+
+    clip-path: polygon(
+        100% 0,
+        0 50%,
+        100% 100%
+    );
+
+    z-index: 10;
+}
+
+
+/* =========================
+   ENVELOPE BOTTOM
+========================= */
+
+.envelope-bottom {
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 58%;
+
+    background: #fbecef;
+
+    clip-path: polygon(
+        0 100%,
+        50% 0,
+        100% 100%
+    );
+
+    z-index: 20;
+}
+
+
+/* =========================
+   TOP FLAP
+========================= */
+
+.envelope-flap {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 58%;
+
+    background: #f0cbd6;
+
+    clip-path: polygon(
+        0 0,
+        50% 100%,
+        100% 0
+    );
+
+    border-radius: 6px 6px 0 0;
+
+    /*
+       Top flap berada di atas
+       envelope lainnya saat tertutup.
+    */
+    z-index: 40;
+
+    transform-origin: 50% 0%;
+
+    transition:
+        transform 0.9s cubic-bezier(.4, 0, .2, 1),
+        opacity 0.2s ease 0.7s;
 }
 
 
@@ -108,7 +247,9 @@ body {
     top: 25px;
     left: 50%;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%)
+        translateY(0);
 
     background: #ffffff;
 
@@ -122,7 +263,13 @@ body {
     box-shadow:
         0 5px 15px rgba(100, 50, 70, 0.08);
 
-    z-index: 20;
+    /*
+       SURAT SELALU PALING DEPAN.
+    */
+    z-index: 100;
+
+    transition:
+        transform 1s cubic-bezier(.22, .61, .36, 1) 0.35s;
 }
 
 
@@ -164,108 +311,45 @@ body {
 
 
 /* =========================
-   LEFT FLAP
+   OPEN ANIMATION
 ========================= */
 
-.envelope-left {
-    position: absolute;
+/*
+   STEP 1
+   Segitiga atas FLIP ke belakang.
 
-    left: 0;
-    top: 0;
+   Dia berputar dari bagian atas,
+   sehingga sudut segitiganya yang
+   tadinya mengarah ke bawah akan
+   berbalik ke atas.
+*/
 
-    width: 50%;
-    height: 100%;
+.envelope.opened .envelope-flap {
+    transform:
+        perspective(700px)
+        rotateX(180deg);
 
-    background: #f4d6df;
+    opacity: 0;
 
-    clip-path: polygon(
-        0 0,
-        100% 50%,
-        0 100%
-    );
-
-    z-index: 4;
+    z-index: 1;
 }
 
 
-/* =========================
-   RIGHT FLAP
-========================= */
+/*
+   STEP 2
+   Surat keluar ke depan.
 
-.envelope-right {
-    position: absolute;
+   Karena surat z-index = 100,
+   surat berada di atas semua
+   bagian envelope.
+*/
 
-    right: 0;
-    top: 0;
+.envelope.opened .letter {
+    transform:
+        translateX(-50%)
+        translateY(-105px);
 
-    width: 50%;
-    height: 100%;
-
-    background: #f4d6df;
-
-    clip-path: polygon(
-        100% 0,
-        0 50%,
-        100% 100%
-    );
-
-    z-index: 4;
-}
-
-
-/* =========================
-   BOTTOM FLAP
-========================= */
-
-.envelope-bottom {
-    position: absolute;
-
-    left: 0;
-    bottom: 0;
-
-    width: 100%;
-    height: 58%;
-
-    background: #fbecef;
-
-    clip-path: polygon(
-        0 100%,
-        50% 0,
-        100% 100%
-    );
-
-    z-index: 5;
-}
-
-
-/* =========================
-   TOP FLAP
-========================= */
-
-.envelope-flap {
-    position: absolute;
-
-    left: 0;
-    top: 0;
-
-    width: 100%;
-    height: 58%;
-
-    background: #f0cbd6;
-
-    clip-path: polygon(
-        0 0,
-        50% 100%,
-        100% 0
-    );
-
-    border-radius: 6px 6px 0 0;
-
-    z-index: 30;
-
-    transition:
-        transform 0.8s ease,
-        opacity 0.5s ease;
+    z-index: 100;
 }
 
 
@@ -322,41 +406,6 @@ body {
     transform: scale(0.96);
 }
 
-
-/* =========================
-   OPEN ANIMATION
-========================= */
-
-/*
-   TUTUP ATAS NAIK KE ATAS
-*/
-
-.envelope.opened .envelope-flap {
-    transform: translateY(-125px);
-
-    opacity: 0;
-
-    pointer-events: none;
-}
-
-
-/*
-   SURAT KELUAR KE ATAS
-*/
-
-.envelope.opened .letter {
-    transform: translateX(-50%) translateY(-100px);
-
-    z-index: 50;
-
-    transition:
-        transform 1s ease 0.25s;
-}
-
-
-/*
-   TOMBOL HILANG
-*/
 
 .open-button.hide {
     opacity: 0;
