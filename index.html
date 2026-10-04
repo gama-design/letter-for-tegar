@@ -1,23 +1,54 @@
-const openButton = document.getElementById("openButton");
-const envelope = document.querySelector(".envelope");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Letter for Tegar</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
-openButton.addEventListener("click", () => {
+<body>
 
-    // Cegah klik berkali-kali
-    openButton.disabled = true;
+    <div class="page">
 
-    // Buka envelope
-    envelope.classList.add("opened");
+        <div class="small-text">
+            A little something for you
+        </div>
 
-    // Hilangkan tombol
-    openButton.classList.add("hide");
+        <!-- ENVELOPE -->
+        <div class="envelope" id="envelope">
 
-    // Tunggu surat selesai keluar
-    // lalu masuk ke halaman detail
-    setTimeout(() => {
+            <!-- Bagian belakang amplop -->
+            <div class="envelope-back"></div>
 
-        window.location.href = "detail.html";
+            <!-- SURAT -->
+            <div class="letter">
+                <div class="letter-small">With Love</div>
+                <div class="letter-title">A Letter for Tegar</div>
+                <div class="letter-heart">♡</div>
+            </div>
 
-    }, 1900);
+            <!-- Bagian depan amplop -->
+            <div class="envelope-front"></div>
 
-});
+            <!-- Tutup amplop -->
+            <div class="envelope-flap"></div>
+
+        </div>
+
+
+        <!-- BUTTON -->
+        <button id="openButton">
+            OPEN
+        </button>
+
+        <div class="footer">
+            made with love ♡
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
