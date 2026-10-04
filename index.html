@@ -3,50 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>A Letter for Tegar</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <div class="page">
+    <main class="cover">
 
-        <div class="small-text">
+        <!-- Decorative Hearts -->
+        <span class="heart heart-1">♡</span>
+        <span class="heart heart-2">♡</span>
+        <span class="heart heart-3">♡</span>
+        <span class="heart heart-4">♡</span>
+
+        <!-- Small Introduction -->
+        <p class="cover-subtitle">
             A little something for you
-        </div>
+        </p>
 
         <!-- ENVELOPE -->
-        <div class="envelope" id="envelope">
+        <div class="envelope">
 
-            <!-- Bagian belakang amplop -->
-            <div class="envelope-back"></div>
-
-            <!-- SURAT -->
+            <!-- Letter -->
             <div class="letter">
-                <div class="letter-small">With Love</div>
-                <div class="letter-title">A Letter for Tegar</div>
-                <div class="letter-heart">♡</div>
+
+                <p class="letter-small">
+                    With Love
+                </p>
+
+                <h1>
+                    A Letter for Tegar
+                </h1>
+
+                <span class="letter-heart">
+                    ♡
+                </span>
+
             </div>
 
-            <!-- Bagian depan amplop -->
-            <div class="envelope-front"></div>
+            <!-- Envelope Bottom Flap -->
+            <div class="envelope-bottom"></div>
 
-            <!-- Tutup amplop -->
+            <!-- Envelope Left Flap -->
+            <div class="envelope-left"></div>
+
+            <!-- Envelope Right Flap -->
+            <div class="envelope-right"></div>
+
+            <!-- Envelope Top Flap -->
             <div class="envelope-flap"></div>
 
         </div>
 
-
-        <!-- BUTTON -->
-        <button id="openButton">
+        <!-- Open Button -->
+        <button class="open-button" id="openButton">
             OPEN
         </button>
 
-        <div class="footer">
+        <!-- Bottom Text -->
+        <p class="cover-footer">
             made with love ♡
-        </div>
+        </p>
 
-    </div>
+    </main>
 
     <script src="script.js"></script>
 
