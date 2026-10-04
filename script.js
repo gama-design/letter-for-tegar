@@ -1,22 +1,18 @@
 const openButton = document.getElementById("openButton");
-const envelope = document.querySelector(".envelope");
-const cover = document.querySelector(".cover");
 
 openButton.addEventListener("click", () => {
 
-    // Cegah tombol diklik berkali-kali
     openButton.disabled = true;
 
-    // Buka flap amplop
-    envelope.classList.add("opened");
-
-    // Hilangkan tombol
+    // Animasi tombol
     openButton.classList.add("hide");
 
-    // Setelah amplop terbuka,
-    // cover akan menghilang
+    // Buka amplop
+    document.querySelector(".envelope").classList.add("opened");
+
+    // Setelah animasi selesai, masuk ke detail
     setTimeout(() => {
-        cover.classList.add("fade-out");
+        window.location.href = "detail.html";
     }, 1500);
 
 });
