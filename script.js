@@ -1,23 +1,22 @@
 const openButton = document.getElementById("openButton");
-const envelope = document.getElementById("envelope");
+const envelope = document.querySelector(".envelope");
+const cover = document.querySelector(".cover");
 
-openButton.addEventListener("click", function () {
+openButton.addEventListener("click", () => {
 
-    // Tombol tidak bisa diklik dua kali
+    // Cegah tombol diklik berkali-kali
     openButton.disabled = true;
 
-    // Mulai animasi amplop
-    envelope.classList.add("open");
+    // Buka flap amplop
+    envelope.classList.add("opened");
 
     // Hilangkan tombol
     openButton.classList.add("hide");
 
-    // Setelah animasi selesai,
-    // masuk ke halaman detail
-    setTimeout(function () {
-
-        window.location.href = "detail.html";
-
-    }, 2200);
+    // Setelah amplop terbuka,
+    // cover akan menghilang
+    setTimeout(() => {
+        cover.classList.add("fade-out");
+    }, 1500);
 
 });
