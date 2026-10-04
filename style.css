@@ -1,4 +1,4 @@
-{
+ {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -54,7 +54,7 @@ body {
 
 
 /* =========================
-   INTRO TEXT
+   INTRO
 ========================= */
 
 .cover-subtitle {
@@ -92,8 +92,6 @@ body {
         0 8px 20px rgba(130, 67, 84, 0.08);
 
     animation: floating 4s ease-in-out infinite;
-
-    perspective: 1000px;
 }
 
 
@@ -124,7 +122,6 @@ body {
     box-shadow:
         0 5px 15px rgba(100, 50, 70, 0.08);
 
-    /* SURAT DI DEPAN */
     z-index: 20;
 
     transition:
@@ -190,7 +187,7 @@ body {
         0 100%
     );
 
-    z-index: 5;
+    z-index: 4;
 }
 
 
@@ -215,7 +212,7 @@ body {
         100% 100%
     );
 
-    z-index: 5;
+    z-index: 4;
 }
 
 
@@ -240,7 +237,7 @@ body {
         100% 100%
     );
 
-    z-index: 6;
+    z-index: 5;
 }
 
 
@@ -267,15 +264,9 @@ body {
 
     border-radius: 6px 6px 0 0;
 
-    /* AWALNYA DI DEPAN */
     z-index: 15;
 
     transform-origin: top center;
-
-    backface-visibility: hidden;
-
-    transition:
-        transform 0.8s ease;
 }
 
 
@@ -334,7 +325,82 @@ body {
 
 
 /* =========================
-   DECORATIVE HEARTS
+   OPEN ANIMATION
+========================= */
+
+/*
+   SAAT OPEN:
+   flap atas naik dan HILANG
+   sehingga tidak mungkin menutupi surat.
+*/
+
+.envelope.opened .envelope-flap {
+    animation: openFlap 0.8s ease forwards;
+}
+
+
+/* Surat keluar ke atas */
+
+.envelope.opened .letter {
+    animation: letterComeOut 1s ease 0.15s forwards;
+}
+
+
+/* =========================
+   BUTTON AFTER OPEN
+========================= */
+
+.open-button.hide {
+    opacity: 0;
+
+    transform: translateY(20px);
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   FLAP ANIMATION
+========================= */
+
+@keyframes openFlap {
+
+    0% {
+        transform: rotateX(0deg);
+        opacity: 1;
+    }
+
+    70% {
+        transform: rotateX(90deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: rotateX(90deg);
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+
+/* =========================
+   LETTER ANIMATION
+========================= */
+
+@keyframes letterComeOut {
+
+    0% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    100% {
+        transform: translateX(-50%) translateY(-90px);
+    }
+}
+
+
+/* =========================
+   HEARTS
 ========================= */
 
 .heart {
@@ -353,8 +419,6 @@ body {
 .heart-1 {
     top: 18%;
     left: 18%;
-
-    animation-delay: 0s;
 }
 
 
@@ -404,43 +468,6 @@ body {
     color: #b47788;
 
     opacity: 0.7;
-}
-
-
-/* =========================
-   OPEN ANIMATION
-========================= */
-
-/* FLAP ATAS LANGSUNG KE BELAKANG */
-
-.envelope.opened .envelope-flap {
-    transform: rotateX(180deg);
-
-    z-index: 1;
-}
-
-
-/* SURAT NAIK KE DEPAN */
-
-.envelope.opened .letter {
-    transform: translateX(-50%) translateY(-90px);
-
-    z-index: 20;
-}
-
-
-/* TOMBOL HILANG */
-
-.open-button.hide {
-    opacity: 0;
-
-    transform: translateY(20px);
-
-    pointer-events: none;
-
-    transition:
-        opacity 0.5s ease,
-        transform 0.5s ease;
 }
 
 
