@@ -4,27 +4,26 @@
   padding: 0;
 }
 
-body {
-  background-color: #2b2b2b;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+html, body {
+  width: 100%;
+  height: 100%;
+  height: -webkit-fill-available; /* Trik agar pas di browser mobile seperti Safari/Chrome HP */
+  overflow: hidden; /* Mencegah scrollbar muncul */
   font-family: 'Georgia', serif;
+  background-color: #ffffff;
 }
 
-/* Container Frame HP */
+/* Container dibuat FULL SATU LAYAR HP */
 .card-container {
-  width: 360px;
-  height: 640px;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh; /* Dynamic Viewport Height untuk HP modern */
   background: linear-gradient(180deg, #ffffff 0%, #ffeaf1 100%);
-  border-radius: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   overflow: hidden;
 }
 
@@ -33,10 +32,10 @@ body {
   position: relative;
   width: 280px;
   height: 180px;
-  margin-top: -30px;
+  margin-top: -40px;
 }
 
-/* 1. Background Dalam Amplop (Warna Pink Agak Gelap) */
+/* 1. Background Dalam Amplop */
 .envelope .pocket-back {
   position: absolute;
   top: 0;
@@ -48,7 +47,7 @@ body {
   z-index: 1;
 }
 
-/* 2. Flap / Tutup Atas Amplop (Bentuk Segitiga Ke Bawah) */
+/* 2. Flap / Tutup Atas Amplop */
 .envelope .flap {
   position: absolute;
   top: 0;
@@ -57,11 +56,11 @@ body {
   height: 0;
   border-left: 140px solid transparent;
   border-right: 140px solid transparent;
-  border-top: 100px solid #f2b8c6; /* Menggunakan border segitiga agar rapi */
+  border-top: 100px solid #f2b8c6;
   transform-origin: top;
   transform: rotateX(0deg);
   transition: transform 0.6s ease-in-out, z-index 0.6s ease-in-out;
-  z-index: 4; /* Paling depan saat tertutup */
+  z-index: 4;
 }
 
 /* 3. Kertas Surat */
@@ -77,8 +76,8 @@ body {
   padding: 24px 15px;
   text-align: center;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
-  z-index: 2; /* Di tengah-tengah */
-  transition: transform 0.8s ease-in-out 0.4s; /* Naik setelah flap terbuka */
+  z-index: 2;
+  transition: transform 0.8s ease-in-out 0.4s;
 }
 
 .letter .title {
@@ -93,7 +92,7 @@ body {
   color: #4a2830;
 }
 
-/* 4. Lipatan Depan Amplop (Kantung V Pink Terang) */
+/* 4. Lipatan Depan Amplop */
 .envelope .pocket-front {
   position: absolute;
   bottom: 0;
@@ -102,21 +101,17 @@ body {
   height: 100%;
   background-color: #f7cbda;
   clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0, 50% 50%);
-  z-index: 3; /* Menutupi bagian bawah kertas */
+  z-index: 3;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
-/* ========================================== */
-/*    KONDISI SAAT TOMBOL OPEN DIKLIK        */
-/* ========================================== */
+/* --- KONDISI SAAT OPENED --- */
 
-/* Tutup atas berputar ke atas & pindah ke belakang kertas */
 .envelope.opened .flap {
   transform: rotateX(180deg);
-  z-index: 1; /* Pindah ke paling belakang agar tidak menutupi teks */
+  z-index: 1;
 }
 
-/* Kertas naik terangkat ke atas pas posisi tulisan kelihatan utuh */
 .envelope.opened .letter {
   transform: translateX(-50%) translateY(-75px);
 }
@@ -124,7 +119,7 @@ body {
 /* Styling Tombol OPEN */
 .open-btn {
   position: absolute;
-  bottom: 60px;
+  bottom: 12vh; /* Menggunakan vh agar posisinya fleksibel di semua tinggi HP */
   padding: 12px 42px;
   background-color: #ffffff;
   color: #52313a;
@@ -142,4 +137,11 @@ body {
   opacity: 0;
   pointer-events: none;
   transform: scale(0.9);
+}
+
+/* Media Query Tambahan untuk Layar Sangat Kecil/Pendek */
+@media screen and (max-height: 600px) {
+  .envelope {
+    transform: scale(0.85); /* Mengecilkan sedikit ukuran amplop jika layar HP sangat pendek */
+  }
 }
