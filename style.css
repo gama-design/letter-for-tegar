@@ -38,13 +38,13 @@ body {
     background:
         radial-gradient(
             circle at 20% 20%,
-            rgba(255, 255, 255, 0.9) 0%,
-            rgba(255, 255, 255, 0) 30%
+            rgba(255, 255, 255, 0.9),
+            transparent 30%
         ),
         radial-gradient(
             circle at 80% 80%,
-            rgba(255, 255, 255, 0.7) 0%,
-            rgba(255, 255, 255, 0) 30%
+            rgba(255, 255, 255, 0.7),
+            transparent 30%
         ),
         linear-gradient(
             135deg,
@@ -58,7 +58,7 @@ body {
 
 
 /* =========================
-   INTRO TEXT
+   INTRO
 ========================= */
 
 .cover-subtitle {
@@ -66,7 +66,6 @@ body {
 
     font-family: Arial, sans-serif;
     font-size: 10px;
-    font-weight: 400;
 
     letter-spacing: 4px;
     text-transform: uppercase;
@@ -78,7 +77,7 @@ body {
 
 
 /* =========================
-   ENVELOPE
+   ENVELOPE BASE
 ========================= */
 
 .envelope {
@@ -100,7 +99,7 @@ body {
 
 
 /* =========================
-   LETTER INSIDE
+   LETTER
 ========================= */
 
 .letter {
@@ -130,8 +129,6 @@ body {
 }
 
 
-/* Small text */
-
 .letter-small {
     margin-bottom: 9px;
 
@@ -147,8 +144,6 @@ body {
 }
 
 
-/* Main title */
-
 .letter h1 {
     font-size: 27px;
 
@@ -162,8 +157,6 @@ body {
 }
 
 
-/* Heart */
-
 .letter-heart {
     margin-top: 12px;
 
@@ -173,8 +166,13 @@ body {
 }
 
 
+/* =================================================
+   4 ENVELOPE FLAPS
+================================================= */
+
+
 /* =========================
-   LEFT FLAP
+   LEFT
 ========================= */
 
 .envelope-left {
@@ -194,12 +192,12 @@ body {
         0 100%
     );
 
-    z-index: 3;
+    z-index: 4;
 }
 
 
 /* =========================
-   RIGHT FLAP
+   RIGHT
 ========================= */
 
 .envelope-right {
@@ -219,12 +217,12 @@ body {
         100% 100%
     );
 
-    z-index: 3;
+    z-index: 4;
 }
 
 
 /* =========================
-   BOTTOM FLAP
+   BOTTOM
 ========================= */
 
 .envelope-bottom {
@@ -244,12 +242,12 @@ body {
         100% 100%
     );
 
-    z-index: 4;
+    z-index: 5;
 }
 
 
 /* =========================
-   TOP FLAP
+   TOP
 ========================= */
 
 .envelope-flap {
@@ -271,7 +269,7 @@ body {
 
     border-radius: 6px 6px 0 0;
 
-    z-index: 5;
+    z-index: 6;
 }
 
 
@@ -296,8 +294,6 @@ body {
 
     font-size: 10px;
 
-    font-weight: 500;
-
     letter-spacing: 4px;
 
     cursor: pointer;
@@ -313,8 +309,6 @@ body {
 }
 
 
-/* Hover */
-
 .open-button:hover {
     background: #ffffff;
 
@@ -325,15 +319,13 @@ body {
 }
 
 
-/* Click */
-
 .open-button:active {
     transform: scale(0.96);
 }
 
 
 /* =========================
-   DECORATIVE HEARTS
+   HEARTS
 ========================= */
 
 .heart {
@@ -352,8 +344,6 @@ body {
 .heart-1 {
     top: 18%;
     left: 18%;
-
-    animation-delay: 0s;
 }
 
 
@@ -407,7 +397,7 @@ body {
 
 
 /* =========================
-   ANIMATIONS
+   ANIMATION
 ========================= */
 
 @keyframes floating {
