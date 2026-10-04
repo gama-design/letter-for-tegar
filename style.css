@@ -1,8 +1,4 @@
-/* =========================
-   GLOBAL
-========================= */
-
-* {
+{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -65,7 +61,6 @@ body {
     margin-bottom: 28px;
 
     font-family: Arial, sans-serif;
-
     font-size: 10px;
     font-weight: 400;
 
@@ -116,10 +111,6 @@ body {
 
     animation: floating 4s ease-in-out infinite;
 
-    /*
-       Jangan pakai overflow:hidden.
-       Surat harus bisa keluar dari envelope.
-    */
     overflow: visible;
 
     transform-style: preserve-3d;
@@ -156,9 +147,10 @@ body {
         0 5px 15px rgba(100, 50, 70, 0.08);
 
     /*
-       SURAT PALING DEPAN
+       Saat tertutup:
+       surat berada di dalam envelope.
     */
-    z-index: 100;
+    z-index: 30;
 
     transition:
         transform 1s cubic-bezier(.22, .61, .36, 1) 0.35s;
@@ -223,7 +215,10 @@ body {
         0 100%
     );
 
-    z-index: 10;
+    /*
+       LEFT tetap di depan surat
+    */
+    z-index: 40;
 }
 
 
@@ -248,7 +243,10 @@ body {
         100% 100%
     );
 
-    z-index: 10;
+    /*
+       RIGHT tetap di depan surat
+    */
+    z-index: 40;
 }
 
 
@@ -273,7 +271,10 @@ body {
         100% 100%
     );
 
-    z-index: 20;
+    /*
+       BOTTOM tetap di depan surat
+    */
+    z-index: 50;
 }
 
 
@@ -302,59 +303,64 @@ body {
 
     /*
        Saat tertutup:
-       top flap berada paling depan.
+       top flap ada di depan surat.
     */
-    z-index: 40;
+    z-index: 60;
 
-    transform-origin: 50% 0%;
+    /*
+       Tidak flip.
+       Tetap berada di tempatnya.
+    */
+    transform: none;
 
-    transform-style: preserve-3d;
+    opacity: 1;
 
-    transition:
-        transform 0.9s cubic-bezier(.4, 0, .2, 1),
-        opacity 0.2s ease 0.75s;
+    transition: none;
 }
 
 
 /* =========================
-   OPEN ANIMATION
+   OPEN STATE
 ========================= */
 
 /*
-   TOP FLAP FLIP
+   Saat dibuka:
 
-   Titik putarnya di bagian atas.
-   Sudut bawah segitiga yang tadinya
-   mengarah ke bawah akan berbalik
-   ke atas.
+   TOP FLAP
+       ↓
+   berada di belakang surat
+
+   SURAT
+       ↓
+   berada di depan TOP FLAP
+
+   LEFT / RIGHT / BOTTOM
+       ↓
+   tetap menutupi bagian bawah surat
 */
 
 .envelope.opened .envelope-flap {
-    transform:
-        rotateX(180deg);
+    z-index: 20;
 
-    opacity: 0;
+    transform: none;
 
-    z-index: 1;
+    opacity: 1;
 }
 
 
-/*
-   LETTER COMES OUT
-
-   Surat bergerak ke atas setelah
-   flap mulai terbuka.
-
-   Surat punya z-index 100,
-   sehingga berada DI DEPAN.
-*/
-
 .envelope.opened .letter {
+    /*
+       POSISI SURAT TETAP SAMA
+       seperti versi yang sudah kamu bilang oke.
+    */
     transform:
         translateX(-50%)
         translateY(-105px);
 
-    z-index: 100;
+    /*
+       Surat berada di depan TOP FLAP
+    */
+    z-index: 30;
 }
 
 
@@ -496,7 +502,7 @@ body {
 
 
 /* =========================
-   ANIMATION
+   ANIMATIONS
 ========================= */
 
 @keyframes floating {
