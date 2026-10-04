@@ -3,21 +3,41 @@ const envelope = document.querySelector(".envelope");
 
 openButton.addEventListener("click", () => {
 
-    // Cegah klik berkali-kali
+    // Cegah klik dua kali
     openButton.disabled = true;
-
-    // Buka envelope
-    envelope.classList.add("opened");
 
     // Hilangkan tombol
     openButton.classList.add("hide");
 
-    // Tunggu surat selesai keluar
-    // lalu masuk ke halaman detail
+    // =========================
+    // TAHAP 1
+    // BUKA TOP FLAP
+    // =========================
+
+    envelope.classList.add("opened");
+
+
+    // =========================
+    // TAHAP 2
+    // SURAT KELUAR
+    // =========================
+
+    setTimeout(() => {
+
+        envelope.classList.add("letter-out");
+
+    }, 700);
+
+
+    // =========================
+    // TAHAP 3
+    // PINDAH KE DETAIL
+    // =========================
+
     setTimeout(() => {
 
         window.location.href = "detail.html";
 
-    }, 1900);
+    }, 2200);
 
 });
