@@ -3,17 +3,17 @@ const envelope = document.querySelector(".envelope");
 
 openButton.addEventListener("click", () => {
 
-    // Mencegah tombol diklik berkali-kali
+    // Cegah klik berkali-kali
     openButton.disabled = true;
 
-    // Mulai animasi envelope
+    // Buka envelope
     envelope.classList.add("opened");
 
-    // Hilangkan tombol OPEN
+    // Hilangkan tombol
     openButton.classList.add("hide");
 
-    // Tunggu animasi selesai
-    // lalu masuk ke halaman surat
+    // Tunggu surat selesai keluar
+    // lalu masuk ke halaman detail
     setTimeout(() => {
 
         window.location.href = "detail.html";
