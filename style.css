@@ -1,5 +1,5 @@
 /* =========================
-   RESET
+   GLOBAL
 ========================= */
 
 * {
@@ -39,12 +39,12 @@ body {
     background:
         radial-gradient(
             circle at 20% 20%,
-            rgba(255, 255, 255, 0.9),
+            rgba(255,255,255,0.9),
             transparent 30%
         ),
         radial-gradient(
             circle at 80% 80%,
-            rgba(255, 255, 255, 0.7),
+            rgba(255,255,255,0.7),
             transparent 30%
         ),
         linear-gradient(
@@ -59,7 +59,7 @@ body {
 
 
 /* =========================
-   INTRO TEXT
+   INTRO
 ========================= */
 
 .cover-subtitle {
@@ -90,56 +90,42 @@ body {
     width: 320px;
     height: 215px;
 
-    background: #f4d6df;
-
     border-radius: 6px;
 
     box-shadow:
-        0 25px 60px rgba(130, 67, 84, 0.18),
-        0 8px 20px rgba(130, 67, 84, 0.08);
+        0 25px 60px rgba(130,67,84,0.18),
+        0 8px 20px rgba(130,67,84,0.08);
+
+    animation:
+        floating 4s ease-in-out infinite;
 
     /*
        PENTING:
-       jangan hidden.
-       Surat harus bisa keluar.
+       Envelope menjadi area visual.
+       Surat tidak akan terlihat melewati
+       bagian envelope sebelum waktunya.
     */
 
     overflow: visible;
 
-    animation:
-        floating 4s ease-in-out infinite;
+    perspective: 1000px;
 }
 
 
 /* =========================
-   TOP FLAP
+   ENVELOPE BACK
 ========================= */
 
-.top-flap {
+.envelope-back {
     position: absolute;
 
-    left: 0;
-    top: 0;
+    inset: 0;
 
-    width: 100%;
-    height: 58%;
+    background: #f4d6df;
 
-    background: #f0cbd6;
+    border-radius: 6px;
 
-    clip-path: polygon(
-        0 0,
-        50% 100%,
-        100% 0
-    );
-
-    border-radius:
-        6px 6px 0 0;
-
-    /*
-       TOP PALING BELAKANG
-    */
-
-    z-index: 10;
+    z-index: 1;
 }
 
 
@@ -153,8 +139,12 @@ body {
     width: 260px;
     height: 160px;
 
-    top: 25px;
     left: 50%;
+    top: 25px;
+
+    /*
+       SURAT AWALNYA DI DALAM.
+    */
 
     transform:
         translateX(-50%)
@@ -165,29 +155,25 @@ body {
     border-radius: 3px;
 
     display: flex;
-
     flex-direction: column;
 
     justify-content: center;
-
     align-items: center;
 
     box-shadow:
-        0 5px 15px rgba(100, 50, 70, 0.08);
+        0 5px 15px rgba(100,50,70,0.08);
 
     /*
-       SURAT DI ATAS TOP
-       tapi masih di bawah
-       LEFT / RIGHT / BOTTOM
+       AWAL:
+       surat di belakang flap.
     */
 
-    z-index: 20;
+    z-index: 2;
 
     transition:
-        transform
-        1s
-        cubic-bezier(.22, .61, .36, 1)
-        0.35s;
+        transform 0.9s
+        cubic-bezier(.22,.61,.36,1)
+        0.7s;
 }
 
 
@@ -229,10 +215,10 @@ body {
 
 
 /* =========================
-   LEFT FLAP
+   LEFT TRIANGLE
 ========================= */
 
-.left-flap {
+.envelope-left {
     position: absolute;
 
     left: 0;
@@ -249,19 +235,15 @@ body {
         0 100%
     );
 
-    /*
-       LEFT DI DEPAN SURAT
-    */
-
-    z-index: 30;
+    z-index: 4;
 }
 
 
 /* =========================
-   RIGHT FLAP
+   RIGHT TRIANGLE
 ========================= */
 
-.right-flap {
+.envelope-right {
     position: absolute;
 
     right: 0;
@@ -278,19 +260,15 @@ body {
         100% 100%
     );
 
-    /*
-       RIGHT DI DEPAN SURAT
-    */
-
-    z-index: 30;
+    z-index: 4;
 }
 
 
 /* =========================
-   BOTTOM FLAP
+   BOTTOM TRIANGLE
 ========================= */
 
-.bottom-flap {
+.envelope-bottom {
     position: absolute;
 
     left: 0;
@@ -307,11 +285,61 @@ body {
         100% 100%
     );
 
+    z-index: 5;
+}
+
+
+/* =========================
+   TOP FLAP CONTAINER
+========================= */
+
+.envelope-top {
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 58%;
+
+    z-index: 10;
+
+    transform-origin: 50% 0%;
+
+    transform-style: preserve-3d;
+
+    transition:
+        transform 0.7s
+        cubic-bezier(.4,0,.2,1);
+}
+
+
+/* =========================
+   TOP TRIANGLE
+========================= */
+
+.top-flap {
+    position: absolute;
+
+    inset: 0;
+
+    background: #f0cbd6;
+
+    clip-path: polygon(
+        0 0,
+        50% 100%,
+        100% 0
+    );
+
+    border-radius:
+        6px 6px 0 0;
+
     /*
-       BOTTOM PALING DEPAN
+       TOP PALING DEPAN
+       saat envelope tertutup.
     */
 
-    z-index: 40;
+    backface-visibility: visible;
 }
 
 
@@ -320,28 +348,42 @@ body {
 ========================= */
 
 /*
-   TOP TETAP DI TEMPAT.
+   TAHAP 1:
+   Top flap membuka ke belakang.
 
-   Yang berubah hanya:
-   TOP = belakang
-   LETTER = di atas TOP
-
-   Posisi surat TETAP seperti
-   versi sebelumnya.
+   Surat BELUM keluar.
 */
 
-.envelope.opened .top-flap {
-    z-index: 10;
+.envelope.opened .envelope-top {
+    transform:
+        rotateX(180deg);
 }
 
 
-.envelope.opened .letter {
+/*
+   TAHAP 2:
+   Setelah flap terbuka,
+   surat keluar.
+
+   Surat bergerak naik,
+   tapi TETAP setengah berada
+   di dalam envelope.
+*/
+
+.envelope.letter-out .letter {
 
     transform:
         translateX(-50%)
         translateY(-105px);
 
-    z-index: 20;
+    /*
+       Sekarang surat berada
+       di depan TOP FLAP,
+       tetapi tetap di belakang
+       LEFT / RIGHT / BOTTOM.
+    */
+
+    z-index: 3;
 }
 
 
@@ -361,7 +403,7 @@ body {
     border-radius: 30px;
 
     background:
-        rgba(255, 255, 255, 0.65);
+        rgba(255,255,255,0.65);
 
     color: #8c4b5d;
 
@@ -396,7 +438,7 @@ body {
 
     box-shadow:
         0 10px 25px
-        rgba(130, 67, 84, 0.15);
+        rgba(130,67,84,0.15);
 }
 
 
@@ -424,7 +466,7 @@ body {
     position: absolute;
 
     color:
-        rgba(197, 111, 135, 0.45);
+        rgba(197,111,135,0.45);
 
     font-size: 20px;
 
@@ -491,7 +533,7 @@ body {
 
 
 /* =========================
-   FLOATING
+   ANIMATIONS
 ========================= */
 
 @keyframes floating {
@@ -508,10 +550,6 @@ body {
     }
 }
 
-
-/* =========================
-   FADE UP
-========================= */
 
 @keyframes fadeUp {
 
@@ -530,10 +568,6 @@ body {
     }
 }
 
-
-/* =========================
-   HEART FLOAT
-========================= */
 
 @keyframes heartFloat {
 
@@ -578,7 +612,6 @@ body {
 
     .cover-subtitle {
         font-size: 9px;
-
         letter-spacing: 3px;
     }
 }
