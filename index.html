@@ -1,37 +1,40 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Undangan Surat Teguh</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Letter for Teguh</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="container">
-        
-        <!-- Area Utama Amplop -->
-        <div class="envelope-wrapper">
-            
-            <!-- 1. FLAP (Tutup Atas Terbuka) - Layer Paling Belakang -->
-            <div class="envelope-flap open"></div>
-            
-            <!-- 2. LETTER (Kertas Surat) - Layer Tengah -->
-            <div class="letter">
-                <div class="letter-content">
-                    <h1>A Letter for Teguh</h1>
-                    <div class="heart-icon">♡</div>
-                </div>
-            </div>
-            
-            <!-- 3. ENVELOPE BODY (Lipatan Depan) - Layer Paling Depan -->
-            <div class="envelope-body"></div>
-        </div>
+  <div class="card-container">
+    
+    <!-- Wrapper utama amplop -->
+    <div class="envelope" id="envelope">
+      
+      <!-- 1. Flap (Tutup atas amplop) -->
+      <div class="flap"></div>
+      
+      <!-- 2. Pocket Back (Background dalam amplop) -->
+      <div class="pocket-back"></div>
+      
+      <!-- 3. Kertas Surat -->
+      <div class="letter">
+        <p class="title">A Letter for Teguh</p>
+        <div class="heart">♡</div>
+      </div>
+      
+      <!-- 4. Pocket Front (Lipatan depan amplop / Kantong) -->
+      <div class="pocket-front"></div>
 
-        <!-- Tombol OPEN -->
-        <button class="open-btn">OPEN</button>
-        
     </div>
 
+    <!-- Tombol OPEN -->
+    <button id="openButton" class="open-btn">OPEN</button>
+
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
