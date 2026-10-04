@@ -1,120 +1,142 @@
-/* Styling Dasar Halaman */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #333; /* Background gelap agar amplop menonjol */
-    font-family: 'Georgia', serif; /* Font elegan untuk surat */
+  background-color: #2b2b2b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Georgia', serif;
 }
 
-/* Container utama untuk efek gradient background light pink */
-.container {
-    width: 360px; /* Meniru layar HP */
-    height: 640px;
-    background: linear-gradient(180deg, #fff 0%, #ffe0e9 100%);
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
+/* Card Container (Layar HP) */
+.card-container {
+  width: 360px;
+  height: 640px;
+  background: linear-gradient(180deg, #ffffff 0%, #ffeaf1 100%);
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
 }
 
-/* Area Wrapper Amplop */
-.envelope-wrapper {
-    position: relative;
-    width: 280px;
-    height: 180px;
-    margin-top: -50px; /* Angkat sedikit ke atas */
+/* Base Envelope */
+.envelope {
+  position: relative;
+  width: 280px;
+  height: 180px;
+  margin-top: -40px;
 }
 
-/* --- KONCI UTAMA LAYER ADA DI SINI --- */
-
-/* 1. FLAP (Tutup Atas Terbuka) */
-.envelope-flap {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #f4c2d0; /* Warna pink sedikit gelap */
-    clip-path: polygon(0 0, 100% 0, 50% 50%); /* Bentuk segitiga flap */
-    
-    /* PENTING: Layer paling belakang */
-    z-index: 1; 
-    
-    /* Transformasi untuk keadaan 'terbuka' ke atas */
-    transform-origin: top;
-    transform: rotateX(180deg) translateY(-100%); 
+/* --- LAYER 1: Flap / Tutup atas --- */
+.envelope .flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f7c0ce;
+  clip-path: polygon(0 0, 100% 0, 50% 55%);
+  transform-origin: top;
+  transform: rotateX(0deg); /* Menutup ke bawah saat awal */
+  transition: transform 0.6s ease-in-out, z-index 0.6s;
+  z-index: 4; /* Saat tertutup, flap menutupi semua */
 }
 
-/* 2. LETTER (Kertas Surat) */
-.letter {
-    position: absolute;
-    bottom: 0; /* Mulai dari dasar amplop */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90%;
-    height: 150px; /* Tinggi kertas */
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    
-    /* PENTING: Layer tengah */
-    z-index: 2; 
-
-    /* Sesuaikan padding agar tulisan 'Teguh' tidak tenggelam */
-    padding: 20px;
-    box-sizing: border-box;
+/* --- LAYER 2: Background Dalam Amplop --- */
+.envelope .pocket-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ebaec0;
+  z-index: 1;
 }
 
-/* 3. ENVELOPE BODY (Lipatan Depan/Kantung) */
-.envelope-body {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #f9ced9; /* Warna pink utama amplop */
-    clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0, 50% 50%); /* Bentuk kantung V */
-    
-    /* PENTING: Layer paling depan menutupi bawah kertas */
-    z-index: 3; 
+/* --- LAYER 3: Kertas Surat --- */
+.envelope .letter {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%) translateY(0);
+  width: 86%;
+  height: 150px;
+  background-color: #ffffff;
+  border-radius: 6px;
+  padding: 24px 15px;
+  text-align: center;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  z-index: 2; /* Berada di antara background & kantong depan */
+  transition: transform 0.8s ease-in-out 0.5s; /* Animasi naik setelah flap kebuka */
 }
 
-/* --- Styling Isi Surat --- */
-.letter-content {
-    text-align: center;
-    color: #652a3a; /* Warna teks plum gelap */
+.letter .title {
+  font-size: 18px;
+  color: #4a2830;
+  margin-bottom: 12px;
 }
 
-.letter-content h1 {
-    font-size: 18px;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    font-weight: normal;
+.letter .heart {
+  font-size: 26px;
+  color: #4a2830;
 }
 
-.heart-icon {
-    font-size: 20px;
+/* --- LAYER 4: Kantong Depan Amplop --- */
+.envelope .pocket-front {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f9cbd7;
+  clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0, 50% 50%);
+  z-index: 3; /* Menutupi bagian bawah kertas */
+  box-shadow: 0 4px 15px rgba(235, 174, 192, 0.4);
 }
 
-/* --- Styling Tombol OPEN --- */
+/* ========================================== */
+/*           KONDISI SAAT OPENED             */
+/* ========================================== */
+
+/* 1. Flap membuka ke atas dan turun layer-nya ke belakang */
+.envelope.opened .flap {
+  transform: rotateX(180deg);
+  z-index: 1; /* Pindah ke paling belakang di bawah kertas */
+}
+
+/* 2. Surat naik ke atas agar tulisan kelihatan pas */
+.envelope.opened .letter {
+  transform: translateX(-50%) translateY(-75px); /* Terangkat ke atas */
+}
+
+/* --- Tombol OPEN --- */
 .open-btn {
-    position: absolute;
-    bottom: 50px;
-    padding: 12px 40px;
-    background-color: #ffffff;
-    color: #652a3a;
-    border: 1px solid #f9ced9;
-    border-radius: 25px;
-    font-size: 14px;
-    letter-spacing: 2px;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(249, 206, 217, 0.4);
+  position: absolute;
+  bottom: 60px;
+  padding: 12px 42px;
+  background-color: #ffffff;
+  color: #52313a;
+  border: 1px solid #f9cbd7;
+  border-radius: 25px;
+  font-size: 13px;
+  letter-spacing: 2px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(249, 203, 215, 0.5);
+  transition: opacity 0.4s ease, transform 0.3s ease;
+}
+
+.open-btn.hide {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.9);
 }
