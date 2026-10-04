@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,70 +14,83 @@
 
     <main class="cover">
 
-        <!-- Decorative Hearts -->
+        <!-- DECORATIVE HEARTS -->
+
         <span class="heart heart-1">♡</span>
         <span class="heart heart-2">♡</span>
         <span class="heart heart-3">♡</span>
         <span class="heart heart-4">♡</span>
 
 
-        <!-- Small Introduction -->
+        <!-- INTRO -->
+
         <p class="cover-subtitle">
             A little something for you
         </p>
 
 
-        <!-- ENVELOPE WRAPPER -->
-        <div class="envelope-wrapper">
+        <!-- ENVELOPE -->
 
-            <!-- ENVELOPE -->
-            <div class="envelope">
+        <div class="envelope">
 
-                <!-- LETTER -->
-                <div class="letter">
+            <!--
+                TOP FLAP
+                Ini sengaja berada paling belakang
+                ketika surat keluar.
+            -->
 
-                    <p class="letter-small">
-                        With Love
-                    </p>
-
-                    <h1>
-                        A Letter for Tegar
-                    </h1>
-
-                    <span class="letter-heart">
-                        ♡
-                    </span>
-
-                </div>
+            <div class="flap top-flap"></div>
 
 
-                <!-- LEFT FLAP -->
-                <div class="envelope-left"></div>
+            <!--
+                LETTER
+                Surat berada di atas TOP FLAP
+                tetapi masih di bawah flap lainnya.
+            -->
 
+            <div class="letter">
 
-                <!-- RIGHT FLAP -->
-                <div class="envelope-right"></div>
+                <p class="letter-small">
+                    With Love
+                </p>
 
+                <h1>
+                    A Letter for Tegar
+                </h1>
 
-                <!-- BOTTOM FLAP -->
-                <div class="envelope-bottom"></div>
-
-
-                <!-- TOP FLAP -->
-                <div class="envelope-flap"></div>
+                <span class="letter-heart">
+                    ♡
+                </span>
 
             </div>
+
+
+            <!--
+                LEFT / RIGHT / BOTTOM
+                Ketiganya berada di depan surat.
+            -->
+
+            <div class="flap left-flap"></div>
+
+            <div class="flap right-flap"></div>
+
+            <div class="flap bottom-flap"></div>
 
         </div>
 
 
         <!-- OPEN BUTTON -->
-        <button class="open-button" id="openButton">
+
+        <button
+            class="open-button"
+            id="openButton"
+        >
             OPEN
         </button>
 
 
-        <!-- Bottom Text -->
+        <!-- FOOTER -->
+
         <p class="cover-footer">
             made with love ♡
         </p>
@@ -87,4 +101,5 @@
     <script src="script.js"></script>
 
 </body>
+
 </html>
