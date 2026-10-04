@@ -13,7 +13,7 @@ html, body {
     padding: 0 !important;
     overflow: hidden !important;
     font-family: 'Georgia', serif;
-    background: linear-gradient(180deg, #ffffff 0%, #F4D1DD 100%) !important;
+    background: linear-gradient(180deg, #ffffff 0%, #F2C8D7 100%) !important;
 }
 
 /* Container Full Satu Layar Browser */
@@ -29,7 +29,7 @@ html, body {
     border: none !important;
     margin: 0 !important;
     padding: 0 !important;
-    background: linear-gradient(180deg, #ffffff 0%, #F4D1DD 100%) !important;
+    background: linear-gradient(180deg, #ffffff 0%, #F2C8D7 100%) !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
