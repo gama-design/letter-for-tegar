@@ -1,90 +1,92 @@
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
+/* 1. Atur HTML & Body agar memenuhi 100% layar browser tanpa scrollbar */
 html, body {
-  width: 100%;
-  height: 100%;
-  height: -webkit-fill-available; /* Trik agar pas di browser mobile seperti Safari/Chrome HP */
-  overflow: hidden; /* Mencegah scrollbar muncul */
-  font-family: 'Georgia', serif;
-  background-color: #ffffff;
+    width: 100%;
+    height: 100%;
+    height: -webkit-fill-available; /* Trik agar pas di mobile browser modern */
+    overflow: hidden; /* Mencegah munculnya scrollbar */
+    background-color: #ffffff; /* Warna default halaman */
+    font-family: 'Georgia', serif;
 }
 
-/* Container dibuat FULL SATU LAYAR HP */
+/* 2. Container Frame HP/Laptop: Dibuat FULL VIEWPORT, tanpa shadow, tanpa radius */
 .card-container {
-  width: 100vw;
-  height: 100vh;
-  height: 100dvh; /* Dynamic Viewport Height untuk HP modern */
-  background: linear-gradient(180deg, #ffffff 0%, #ffeaf1 100%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
+    width: 100vw;  /* Memenuhi lebar layar browser */
+    height: 100vh; /* Memenuhi tinggi layar browser */
+    height: 100dvh; /* Dynamic Viewport Height untuk mobile modern */
+    background: linear-gradient(180deg, #ffffff 0%, #ffeaf1 100%); /* Gradient pink full */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    /* PERBAIKAN: Hapus box-shadow dan border-radius dari versi sebelumnya */
 }
 
-/* Area Utama Amplop */
+/* 3. Area Utama Amplop (Ukuran Fixed) */
 .envelope {
-  position: relative;
-  width: 280px;
-  height: 180px;
-  margin-top: -40px;
+    position: relative;
+    width: 280px;  /* Lebar amplop tetap */
+    height: 180px; /* Tinggi amplop tetap */
+    margin-top: -30px; /* Sedikit ke atas dari tengah */
 }
 
 /* 1. Background Dalam Amplop */
 .envelope .pocket-back {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #e2a6b8;
-  border-radius: 0 0 10px 10px;
-  z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #e2a6b8;
+    border-radius: 0 0 10px 10px;
+    z-index: 1;
 }
 
-/* 2. Flap / Tutup Atas Amplop */
+/* 2. Flap / Tutup Atas Amplop (Bentuk Segitiga) */
 .envelope .flap {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 0;
-  border-left: 140px solid transparent;
-  border-right: 140px solid transparent;
-  border-top: 100px solid #f2b8c6;
-  transform-origin: top;
-  transform: rotateX(0deg);
-  transition: transform 0.6s ease-in-out, z-index 0.6s ease-in-out;
-  z-index: 4;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 140px solid transparent;
+    border-right: 140px solid transparent;
+    border-top: 100px solid #f2b8c6;
+    transform-origin: top;
+    transform: rotateX(0deg);
+    transition: transform 0.6s ease-in-out, z-index 0.6s ease-in-out;
+    z-index: 4; /* Paling depan saat tertutup */
 }
 
-/* 3. Kertas Surat */
+/* 3. Kertas Surat (Layer Tengah) */
 .envelope .letter {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%) translateY(0);
-  width: 86%;
-  height: 150px;
-  background-color: #ffffff;
-  border-radius: 6px;
-  padding: 24px 15px;
-  text-align: center;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
-  z-index: 2;
-  transition: transform 0.8s ease-in-out 0.4s;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%) translateY(0);
+    width: 86%;
+    height: 150px;
+    background-color: #ffffff;
+    border-radius: 6px;
+    padding: 24px 15px;
+    text-align: center;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    z-index: 2; /* Di tengah-tengah */
+    transition: transform 0.8s ease-in-out 0.4s;
 }
 
 .letter .title {
-  font-size: 18px;
-  color: #4a2830;
-  margin-bottom: 12px;
-  font-weight: 500;
+    font-size: 18px;
+    color: #4a2830;
+    margin-bottom: 12px;
+    font-weight: 500;
 }
 
 .letter .heart {
@@ -92,56 +94,49 @@ html, body {
   color: #4a2830;
 }
 
-/* 4. Lipatan Depan Amplop */
+/* 4. Lipatan Depan Amplop (Layer Depan) */
 .envelope .pocket-front {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #f7cbda;
-  clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0, 50% 50%);
-  z-index: 3;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f7cbda;
+    clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0, 50% 50%);
+    z-index: 3; /* Menutupi bagian bawah kertas */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
 /* --- KONDISI SAAT OPENED --- */
 
 .envelope.opened .flap {
-  transform: rotateX(180deg);
-  z-index: 1;
+    transform: rotateX(180deg);
+    z-index: 1; /* Pindah ke paling belakang */
 }
 
 .envelope.opened .letter {
-  transform: translateX(-50%) translateY(-75px);
+    transform: translateX(-50%) translateY(-75px);
 }
 
 /* Styling Tombol OPEN */
 .open-btn {
-  position: absolute;
-  bottom: 12vh; /* Menggunakan vh agar posisinya fleksibel di semua tinggi HP */
-  padding: 12px 42px;
-  background-color: #ffffff;
-  color: #52313a;
-  border: 1px solid #f9cbd7;
-  border-radius: 25px;
-  font-size: 13px;
-  letter-spacing: 2px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(249, 203, 215, 0.5);
-  transition: opacity 0.4s ease, transform 0.3s ease;
+    position: absolute;
+    bottom: 60px; /* Jarak dari batas bawah layar */
+    padding: 12px 42px;
+    background-color: #ffffff;
+    color: #52313a;
+    border: 1px solid #f9cbd7;
+    border-radius: 25px;
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(249, 203, 215, 0.5);
+    transition: opacity 0.4s ease, transform 0.3s ease;
 }
 
 .open-btn.hide {
-  opacity: 0;
-  pointer-events: none;
-  transform: scale(0.9);
-}
-
-/* Media Query Tambahan untuk Layar Sangat Kecil/Pendek */
-@media screen and (max-height: 600px) {
-  .envelope {
-    transform: scale(0.85); /* Mengecilkan sedikit ukuran amplop jika layar HP sangat pendek */
-  }
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.9);
 }
