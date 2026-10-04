@@ -4,7 +4,7 @@
     padding: 0 !important;
 }
 
-/* Memaksa HTML dan Body Full 100% tanpa batas */
+/* Memaksa HTML dan Body Full 100% Layar */
 html, body {
     width: 100% !important;
     height: 100% !important;
@@ -16,7 +16,7 @@ html, body {
     background: linear-gradient(180deg, #ffffff 0%, #ffeaf1 100%) !important;
 }
 
-/* Memaksa Card Container Full Satu Layar Browser */
+/* Container Full Satu Layar Browser */
 .card-container, .container, body > div {
     width: 100vw !important;
     height: 100vh !important;
@@ -38,12 +38,26 @@ html, body {
     overflow: hidden !important;
 }
 
-/* Area Utama Amplop */
+/* Area Utama Amplop + Animasi Floating */
 .envelope {
     position: relative;
     width: 280px;
     height: 180px;
-    margin-top: -30px;
+    margin-top: -60px; /* Sedikit dinaikkan agar proporsional */
+    animation: floatEnvelope 3s ease-in-out infinite;
+}
+
+/* Keyframes Gerakan Floating Naik-Turun */
+@keyframes floatEnvelope {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-12px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
 }
 
 /* 1. Background Dalam Amplop */
@@ -116,7 +130,12 @@ html, body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
-/* KONDISI SAAT OPENED */
+/* --- KONDISI SAAT TOMBOL OPEN DIKLIK --- */
+
+.envelope.opened {
+    animation: none;
+}
+
 .envelope.opened .flap {
     transform: rotateX(180deg);
     z-index: 1;
@@ -126,25 +145,36 @@ html, body {
     transform: translateX(-50%) translateY(-75px);
 }
 
-/* Styling Tombol OPEN */
+/* ========================================== */
+/*        STYLING TOMBOL OPEN TERBARU         */
+/* ========================================== */
 .open-btn {
-    position: absolute;
-    bottom: 60px;
-    padding: 12px 42px;
-    background-color: #ffffff;
-    color: #52313a;
-    border: 1px solid #f9cbd7;
-    border-radius: 25px;
-    font-size: 13px;
-    letter-spacing: 2px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(249, 203, 215, 0.5);
-    transition: opacity 0.4s ease, transform 0.3s ease;
+    position: relative !important;
+    margin-top: 45px !important; /* Menaikkan posisi tombol lebih dekat ke bawah amplop */
+    bottom: auto !important;
+    padding: 14px 50px !important; /* Ukuran tombol dibuat lebih besar */
+    background-color: #f7cbda !important; /* Warna pink manis (solid, tidak transparan) */
+    color: #52313a !important; /* Warna teks gelap plum agar kontras */
+    border: 2px solid #f2b8c6 !important;
+    border-radius: 30px !important;
+    font-size: 15px !important; /* Ukuran font teks OPEN dipตั้ง gedean */
+    letter-spacing: 3px !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+    box-shadow: 0 6px 18px rgba(247, 203, 218, 0.8) !important;
+    transition: opacity 0.4s ease, transform 0.3s ease, background-color 0.2s !important;
+    z-index: 10 !important;
 }
 
+/* Efek saat tombol di-hover mouse */
+.open-btn:hover {
+    background-color: #f2b8c6 !important;
+    transform: scale(1.04) !important;
+}
+
+/* Efek saat tombol di-klik */
 .open-btn.hide {
-    opacity: 0;
-    pointer-events: none;
-    transform: scale(0.9);
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: scale(0.9) !important;
 }
